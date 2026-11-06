@@ -1,0 +1,98 @@
+{"t": 0.004, "data": "\u001b[?2004h$ "}
+{"t": 0.004, "command": "trustauto explain -- mkfs -t ext4 /dev/sda"}
+{"t": 0.004, "data": "trustauto explain -- mkfs -t ext4 /dev/sda\r\n\u001b[?2004l\r"}
+{"t": 0.004, "data": "command:  /usr/sbin/mkfs -t ext4 /dev/sda\r\nmode:     rule\r\nverdict:  deny \u001b[38;5;16;48;5;210m > < \u001b[0m\r\nrule:     no-mkfs\r\nreason:   denied by rule `no-mkfs`\r\ndecided:  0 us\r\n"}
+{"t": 0.004, "data": "\u001b[?2004h$ "}
+{"t": 0.004, "mark": "start"}
+{"t": 0.004, "command": "apt update"}
+{"t": 0.005, "data": "apt update\r\n\u001b[?2004l\r"}
+{"t": 0.005, "data": "\u001b[38;5;16;48;5;215m ^ ^ \u001b[0m root (apt-update)\r\n"}
+{"t": 0.027, "data": "\u001b[33m\r0% [Working]\u001b[0m"}
+{"t": 0.535, "data": "\u001b[33m\r0% [Connecting to jp.archive.ubuntu.com (185.125.190.83)] [Waiting for header\u001b[0m"}
+{"t": 0.651, "data": "\r                                                                             \rHit:1 http://security.ubuntu.com/ubuntu resolute-security InRelease\r\n\u001b[33m\r                                                                             \r0% [Waiting for headers]\u001b[0m"}
+{"t": 0.663, "data": "\u001b[33m\r0% [Waiting for headers]\u001b[0m"}
+{"t": 0.803, "data": "\r                        \rHit:2 http://jp.archive.ubuntu.com/ubuntu resolute InRelease\r\n\u001b[33m\r                        \r0% [Working]\u001b[0m"}
+{"t": 0.816, "data": "\u001b[33m\r0% [Waiting for headers]\u001b[0m"}
+{"t": 1.054, "data": "\r                        \rHit:3 http://jp.archive.ubuntu.com/ubuntu resolute-updates InRelease\r\n\u001b[33m\r                        \r0% [Working]\u001b[0m"}
+{"t": 1.067, "data": "\u001b[33m\r0% [Waiting for headers]\u001b[0m"}
+{"t": 1.299, "data": "\r                        \rHit:4 http://jp.archive.ubuntu.com/ubuntu resolute-backports InRelease\r\n\u001b[33m\r                        \r0% [Working]\u001b[0m"}
+{"t": 1.313, "data": "\u001b[33m\r20% [Working]\u001b[0m\r             \r"}
+{"t": 1.393, "data": "\rReading package lists... 0%\r"}
+{"t": 1.395, "data": "\rReading package lists... 0%\r"}
+{"t": 1.397, "data": "\rReading package lists... 0%\r"}
+{"t": 1.409, "data": "\rReading package lists... 4%\r\rReading package lists... 4%\r"}
+{"t": 1.411, "data": "\rReading package lists... 7%\r\rReading package lists... 7%\r"}
+{"t": 1.413, "data": "\rReading package lists... 7%\r\rReading package lists... 7%\r"}
+{"t": 1.413, "data": "\rReading package lists... 8%\r\rReading package lists... 8%\r"}
+{"t": 1.573, "data": "\rReading package lists... 57%\r\rReading package lists... 57%\r"}
+{"t": 1.593, "data": "\rReading package lists... 79%\r\rReading package lists... 79%\r"}
+{"t": 1.596, "data": "\rReading package lists... 79%\r\rReading package lists... 79%\r"}
+{"t": 1.597, "data": "\rReading package lists... 80%\r\rReading package lists... 80%\r"}
+{"t": 1.605, "data": "\rReading package lists... 83%\r\rReading package lists... 83%\r"}
+{"t": 1.607, "data": "\rReading package lists... 84%\r\rReading package lists... 84%\r"}
+{"t": 1.613, "data": "\rReading package lists... 87%\r\rReading package lists... 87%\r"}
+{"t": 1.615, "data": "\rReading package lists... 88%\r\rReading package lists... 88%\r"}
+{"t": 1.619, "data": "\rReading package lists... 90%\r\rReading package lists... 90%\r"}
+{"t": 1.62, "data": "\rReading package lists... 90%\r\rReading package lists... 90%\r"}
+{"t": 1.62, "data": "\rReading package lists... 90%\r\rReading package lists... 90%\r"}
+{"t": 1.621, "data": "\rReading package lists... 90%\r\rReading package lists... 90%\r"}
+{"t": 1.621, "data": "\rReading package lists... 90%\r\rReading package lists... 90%\r"}
+{"t": 1.621, "data": "\rReading package lists... 90%\r\rReading package lists... 90%\r"}
+{"t": 1.624, "data": "\rReading package lists... 93%\r\rReading package lists... 93%\r"}
+{"t": 1.625, "data": "\rReading package lists... 94%\r\rReading package lists... 94%\r"}
+{"t": 1.628, "data": "\rReading package lists... 97%\r\rReading package lists... 97%\r"}
+{"t": 1.63, "data": "\rReading package lists... 98%\r\rReading package lists... 98%\r"}
+{"t": 1.63, "data": "\rReading package lists... 99%\r\rReading package lists... 99%\r"}
+{"t": 1.631, "data": "\rReading package lists... 99%\r\rReading package lists... 99%\r"}
+{"t": 1.631, "data": "\rReading package lists... 99%\r\rReading package lists... 99%\r"}
+{"t": 1.638, "data": "\rReading package lists... 99%\r\rReading package lists... 99%\r"}
+{"t": 1.647, "data": "                             \r"}
+{"t": 1.65, "data": "\rBuilding dependency tree... 0%\r\rBuilding dependency tree... 0%\r"}
+{"t": 1.65, "data": "\rBuilding dependency tree... 0%\r"}
+{"t": 1.664, "data": "\rBuilding dependency tree... 50%\r\rBuilding dependency tree... 50%\r"}
+{"t": 1.719, "data": "                                \r\rReading state information... 0%\r\rReading state information... 0%\r"}
+{"t": 1.719, "data": "                                \r"}
+{"t": 1.727, "data": "\u001b[1m47 packages can be upgraded. Run 'apt list --upgradable' to see them.\r\n"}
+{"t": 1.729, "data": "\u001b[0m"}
+{"t": 1.729, "data": "\u001b[?2004h$ "}
+{"t": 1.729, "command": "apt search '^vim$'"}
+{"t": 1.73, "data": "apt search '^vim$'\r\n\u001b[?2004l\r"}
+{"t": 1.804, "data": "\rSorting... 0%\r\rSorting... 0%\r"}
+{"t": 1.805, "data": "\rSorting... 0%\r"}
+{"t": 1.841, "data": "              \r\rFull Text Search... 50%\r\rFull Text Search... 50%\r"}
+{"t": 1.87, "data": "                        \r\u001b[32mvim\u001b[0m/resolute-updates 2:9.1.2141-1ubuntu4.10 arm64 [upgradable from: 2:9.1.2141-1ubuntu4.9]\r\n  Vi IMproved - enhanced vi editor\r\n\r\n"}
+{"t": 1.873, "data": "\u001b[?2004h$ "}
+{"t": 1.873, "command": "trustauto explain -- apt install htop"}
+{"t": 1.873, "data": "trustauto explain -- apt install htop\r\n\u001b[?2004l\r"}
+{"t": 1.874, "data": "command:  /usr/bin/apt install htop\r\nmode:     rule\r\nverdict:  ask \u001b[38;5;16;48;5;147m ? ? \u001b[0m\r\nrule:     apt-install\r\nreason:   envelope `apt-install` needs ML, which rule mode does not use\r\ndecided:  0 us\r\n"}
+{"t": 1.874, "data": "\u001b[?2004h$ "}
+{"t": 1.874, "command": "apt install ./evil.deb"}
+{"t": 1.874, "data": "apt install ./evil.deb\r\n\u001b[?2004l\r"}
+{"t": 1.874, "data": "\u001b[38;5;16;48;5;147m ? ? \u001b[0m needs approval\r\n"}
+{"t": 1.875, "data": "trustauto: administrator approval required\r\n  command:   /usr/bin/apt install ./evil.deb\r\n  requester: ta_demo\r\n  reason:    no rule matches this command\r\n  (Ctrl-D cancels)\r\n"}
+{"t": 1.875, "data": "Password: "}
+{"t": 2.378, "data": "\r\n"}
+{"t": 2.38, "data": "trustauto: approval cancelled\r\n"}
+{"t": 2.38, "data": "\u001b[?2004h$ "}
+{"t": 2.38, "command": "trustauto explain -- rm -rf /"}
+{"t": 2.381, "data": "trustauto explain -- rm -rf /\r\n\u001b[?2004l\r"}
+{"t": 2.384, "data": "trustauto: rm is an alias of /usr/bin/gnurm: call the real name explicitly\r\n"}
+{"t": 2.384, "data": "\u001b[?2004h$ "}
+{"t": 2.384, "command": "trustauto run -- mkfs -t ext4 /dev/sda"}
+{"t": 2.385, "data": "trustauto run -- mkfs -t ext4 /dev/sda\r\n\u001b[?2004l\r"}
+{"t": 2.387, "data": "\u001b[38;5;16;48;5;210m > < \u001b[0m refused (no-mkfs)\r\n"}
+{"t": 2.389, "data": "trustauto: denied: denied by rule `no-mkfs`\r\n"}
+{"t": 2.389, "data": "\u001b[?2004h$ "}
+{"t": 2.389, "command": "id -u"}
+{"t": 2.39, "data": "id -u\r\n\u001b[?2004l\r"}
+{"t": 2.393, "data": "1001\r\n"}
+{"t": 2.393, "data": "\u001b[?2004h$ "}
+{"t": 2.393, "command": "trustauto off"}
+{"t": 2.393, "data": "trustauto off\r\n\u001b[?2004l\r"}
+{"t": 2.395, "data": "\u001b[38;5;16;48;5;245m - - \u001b[0m trustauto is off: commands run with normal rights\r\n"}
+{"t": 2.395, "data": "\u001b[?2004h$ "}
+{"t": 2.395, "command": "trustauto on"}
+{"t": 2.396, "data": "trustauto on\r\n\u001b[?2004l\r"}
+{"t": 2.397, "data": "\u001b[38;5;16;48;5;115m 0 0 \u001b[0m trustauto is on\r\n"}
+{"t": 2.397, "data": "\u001b[?2004h$ "}
+{"t": 2.397, "data": "exit\r\n\u001b[?2004l\rexit\r\n"}

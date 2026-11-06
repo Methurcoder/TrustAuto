@@ -1,0 +1,7 @@
+known_avg_ext_facts_transformer target rows 8297 {'teacher_allow': 664, 'risky': 1550, 'review': 3928, 'teacher_deny': 526, 'harmless': 1629} risky groups 217
+  fold 0: train 3558, test 1546, limit 0.0615, 1388s
+  fold 1: train 3405, test 1856, limit 0.2080, 1145s
+  fold 2: train 3649, test 1343, limit 0.0721, 1306s
+  fold 3: train 3520, test 1438, limit 0.0943, 1316s
+  fold 4: train 3344, test 2114, limit 0.0842, 1257s
+{"model": "known_avg_ext_facts_transformer", "split": "target", "machines": ["deb137", "ubu2610", "ubu24", "deb14"], "verdict": "FAIL", "auc": 0.6518686552941978, "risky_rows": [21, 1550], "risky_groups": [11, 217], "risky_bound": 0.08251135909374557, "harmless_auto": 0.4679459223724379, "unchanged": [715, 1629], "changed_allowed_by_gemini": [358, 664], "denied_by_gemini": [11, 526], "review": [645, 3928]}

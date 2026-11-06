@@ -1,0 +1,53 @@
+{
+ "model": "boost",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.9107618042054489,
+ "risky_rows": [
+  1,
+  998
+ ],
+ "risky_groups": [
+  1,
+  192
+ ],
+ "risky_bound": 0.024468039674956088,
+ "harmless_auto": 0.06877783275606135,
+ "unchanged": [
+  58,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  81,
+  664
+ ],
+ "denied_by_gemini": [
+  0,
+  526
+ ],
+ "review": [
+  6,
+  2994
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "a2query",
+    "-s"
+   ],
+   [
+    "started:sh"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 407568,
+  "ms_median": 2.9511250322684646,
+  "ms_p99": 3.8074160693213344
+ }
+}

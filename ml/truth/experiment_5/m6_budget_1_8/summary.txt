@@ -1,0 +1,10 @@
+known_avg_ext_facts_transformer  machine              AUC 0.835 risky   3/192 UB   4.0%  harmless  62.6% unchanged 896/1357 changed 370/664 geminiDeny 3 review 362/2994 FAIL
+known_avg_ext_facts_transformer  target               AUC 0.663 risky   8/192 UB   7.4%  harmless  48.7% unchanged 597/1357 changed 388/664 geminiDeny 9 review 311/2994 FAIL
+known_avg_ext_general_facts_transformer machine              AUC 0.833 risky   4/192 UB   4.7%  harmless  61.4% unchanged 921/1357 changed 319/664 geminiDeny 3 review 346/2994 FAIL
+known_avg_ext_general_facts_transformer target               AUC 0.662 risky   9/192 UB   8.0%  harmless  47.8% unchanged 612/1357 changed 355/664 geminiDeny 15 review 332/2994 FAIL
+known_avg_facts_transformer      machine              AUC 0.834 risky   4/192 UB   4.7%  harmless  62.9% unchanged 893/1357 changed 379/664 geminiDeny 2 review 325/2994 FAIL
+known_avg_facts_transformer      target               AUC 0.662 risky   6/192 UB   6.1%  harmless  45.3% unchanged 568/1357 changed 347/664 geminiDeny 9 review 250/2994 FAIL
+known_boost                      machine              AUC 0.828 risky   5/192 UB   5.4%  harmless  45.6% unchanged 632/1357 changed 289/664 geminiDeny 2 review 110/2994 FAIL
+known_boost                      target               AUC 0.655 risky   6/192 UB   6.1%  harmless  38.1% unchanged 417/1357 changed 354/664 geminiDeny 6 review 152/2994 FAIL
+known_ext_boost                  machine              AUC 0.826 risky  11/192 UB   9.3%  harmless  62.6% unchanged 876/1357 changed 389/664 geminiDeny 20 review 292/2994 FAIL
+known_ext_boost                  target               AUC 0.654 risky   8/192 UB   7.4%  harmless  43.4% unchanged 529/1357 changed 348/664 geminiDeny 17 review 254/2994 FAIL

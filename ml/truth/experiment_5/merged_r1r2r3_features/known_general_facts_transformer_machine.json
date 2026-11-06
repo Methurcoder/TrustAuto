@@ -1,0 +1,89 @@
+{
+ "model": "known_general_facts_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8306985964953293,
+ "risky_rows": [
+  4,
+  998
+ ],
+ "risky_groups": [
+  4,
+  192
+ ],
+ "risky_bound": 0.04703755834755213,
+ "harmless_auto": 0.5220188025729837,
+ "unchanged": [
+  816,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  239,
+  664
+ ],
+ "denied_by_gemini": [
+  1,
+  526
+ ],
+ "review": [
+  294,
+  2994
+ ],
+ "missed": [
+  [
+   "ubu2610",
+   [
+    "sed",
+    "--in-place",
+    "/^[[:space:]]*$/d",
+    "/etc/ssh/ssh_host_ecdsa_key.pub"
+   ],
+   [
+    "change:ssh_config"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "systemctl",
+    "enable",
+    "systemd-networkd"
+   ],
+   [
+    "check:boot",
+    "check:multi_user",
+    "check:role_http"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/var/spool/cron/settings"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mv",
+    "/usr/bin/expiry",
+    "/usr/bin/expiry.bak"
+   ],
+   [
+    "change:new_setuid"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 166665,
+  "ms_median": 0.8337079780176282,
+  "ms_p99": 1.8179579637944698
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "model": "text_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.9036732427143386,
+ "risky_rows": [
+  0,
+  574
+ ],
+ "risky_groups": [
+  0,
+  161
+ ],
+ "risky_bound": 0.018434990637976215,
+ "harmless_auto": 0.06359300476947535,
+ "unchanged": [
+  71,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  9,
+  357
+ ],
+ "denied_by_gemini": [
+  0,
+  448
+ ],
+ "review": [
+  39,
+  2090
+ ],
+ "missed": [],
+ "cost": {
+  "bytes": 203020,
+  "ms_median": 0.6777079543098807,
+  "ms_p99": 1.200667000375688
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "model": "known_tree",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.7395965235409232,
+ "risky_rows": [
+  0,
+  574
+ ],
+ "risky_groups": [
+  0,
+  161
+ ],
+ "risky_bound": 0.018434990637976215,
+ "harmless_auto": 0.0,
+ "unchanged": [
+  0,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  0,
+  357
+ ],
+ "denied_by_gemini": [
+  0,
+  448
+ ],
+ "review": [
+  0,
+  2090
+ ],
+ "missed": [],
+ "cost": {
+  "bytes": 19320,
+  "ms_median": 0.028333975933492184,
+  "ms_p99": 0.053333002142608166
+ }
+}

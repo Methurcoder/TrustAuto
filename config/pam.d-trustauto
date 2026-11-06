@@ -1,0 +1,3 @@
+# PAM service for TrustAuto approvals. Installed to /etc/pam.d/trustauto.
+@include common-auth
+@include common-account

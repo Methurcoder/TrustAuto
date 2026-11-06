@@ -1,0 +1,37 @@
+{
+ "model": "tree",
+ "split": "machine_target",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.7898409085959449,
+ "risky_rows": [
+  0,
+  574
+ ],
+ "risky_groups": [
+  0,
+  161
+ ],
+ "risky_bound": 0.018434990637976215,
+ "harmless_auto": 0.0,
+ "unchanged": [
+  0,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  0,
+  357
+ ],
+ "denied_by_gemini": [
+  0,
+  448
+ ],
+ "review": [
+  0,
+  2090
+ ],
+ "missed": []
+}

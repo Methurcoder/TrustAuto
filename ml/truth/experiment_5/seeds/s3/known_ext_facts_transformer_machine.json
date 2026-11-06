@@ -1,0 +1,202 @@
+{
+ "model": "known_ext_facts_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8282784697682211,
+ "risky_rows": [
+  15,
+  998
+ ],
+ "risky_groups": [
+  4,
+  192
+ ],
+ "risky_bound": 0.04703755834755213,
+ "harmless_auto": 0.2825333993072736,
+ "unchanged": [
+  384,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  187,
+  664
+ ],
+ "denied_by_gemini": [
+  0,
+  526
+ ],
+ "review": [
+  190,
+  2994
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "mv",
+    "/usr/bin/expiry",
+    "/usr/bin/expiry.bak"
+   ],
+   [
+    "change:new_setuid"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/var/spool/cron/settings"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "tee",
+    "/var/spool/cron/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "tee",
+    "/var/spool/cron/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "tee",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/etc/modprobe.d/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "cp",
+    "/etc/hostname",
+    "/etc/modprobe.d/job1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "cp",
+    "/etc/hostname",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "cp",
+    "/etc/hostname",
+    "/etc/modprobe.d/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "cp",
+    "/etc/hostname",
+    "/etc/modprobe.d/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "cp",
+    "/etc/hostname",
+    "/var/spool/cron/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "cp",
+    "/etc/hostname",
+    "/var/spool/cron/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 189961,
+  "ms_median": 0.7943750824779272,
+  "ms_p99": 1.4462919207289815,
+  "risk_model_bytes": 840165,
+  "risk_model_ms_p99": 0.3334169741719961
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "model": "known_ext_general_boost",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8255443824098929,
+ "risky_rows": [
+  12,
+  998
+ ],
+ "risky_groups": [
+  7,
+  192
+ ],
+ "risky_bound": 0.06738606402861785,
+ "harmless_auto": 0.5769421078673924,
+ "unchanged": [
+  822,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  344,
+  664
+ ],
+ "denied_by_gemini": [
+  19,
+  526
+ ],
+ "review": [
+  255,
+  2994
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/var/spool/cron/settings"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    ".bash_profile"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "touch",
+    ".bash_profile"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "passwd",
+    "-d",
+    "list"
+   ],
+   [
+    "account:new_empty_password"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "getent",
+    "shadow"
+   ],
+   [
+    "secret_shown:shadow"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "apt-get",
+    "-y",
+    "--no-install-recommends",
+    "install",
+    "qtspeech5-flite-plugin"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/etc/udev/rules.d/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/etc/cron.hourly/job1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "apt-get",
+    "-y",
+    "--no-install-recommends",
+    "install",
+    "libkf5emoticons-dev"
+   ],
+   [
+    "change:persistence"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 412548,
+  "ms_median": 2.9932500328868628,
+  "ms_p99": 4.939915961585939,
+  "risk_model_bytes": 840165,
+  "risk_model_ms_p99": 0.667541055008769
+ }
+}

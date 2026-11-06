@@ -1,0 +1,39 @@
+/target
+# Derived from third-party corpora, including GPL-3.0 data. Rebuild it with ml/build_dataset.py.
+/ml/data
+/dist
+.DS_Store
+# Regenerable experiment artifacts (ml/weight_space/*.py rebuild them); the
+# selections, evaluations and reports next to them stay tracked.
+/ml/weight_space/partitions_v1/*.jsonl
+/ml/weight_space/pilot_v*/**/*.pt
+/ml/weight_space/pilot_v*/**/*_scores.json
+/ml/weight_space/pilot_v*/**/*scores.jsonl
+# Copied to ml/facts_model.bin, which the build embeds.
+/ml/release/out/facts_model.bin
+/ml/release/export.log
+# Rendered video and sound; promo/film.py and promo/intro.py rebuild them.
+/promo/out/
+*.mp4
+*.mov
+*.wav
+# Editor and tool leftovers.
+__pycache__/
+*.pyc
+*.swp
+*~
+.idea/
+.vscode/
+# Rows, prompts and scores that hold commands from NL2Bash and GTFOBins (GPL-3.0),
+# which cannot be distributed under this repository's Apache-2.0 license. They stay
+# on the machine that ran the experiments; ml/truth/collect_commands.py rebuilds the
+# command lists from the sources. tests/facts_parity.rs skips without golden.json.
+/ml/truth/experiment_5/lab_*.jsonl
+/ml/truth/experiment_5/taught_*.jsonl
+/ml/truth/experiment_5/round2/lab_*.jsonl
+/ml/truth/experiment_5/round2/taught_*.jsonl
+/ml/truth/experiment_5/round2/round2_*/
+/ml/truth/experiment_5/answers/
+/ml/truth/experiment_5/round4_evaluation/reproduction/labels/
+/ml/truth/experiment_5/round4_evaluation/results/scores/
+/ml/release/out/golden.json

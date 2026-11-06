@@ -1,0 +1,1 @@
+{"scenario": "machine", "seed": 3, "selected": "tftv_L1_0.03", "baseline": {"danger_rows": [2, 195], "danger_groups": [2, 41], "benign_rows": [159, 371]}, "chosen": {"danger_rows": [2, 195], "danger_groups": [2, 41], "benign_rows": [161, 371], "new_review_allows": 0}}

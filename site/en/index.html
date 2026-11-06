@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="robots" content="noindex">
+<title>TrustAuto</title>
+<meta name="description" content="Automatic privilege elevation for Linux, with no daemon. Commands your policy allows run as root without typing sudo.">
+<link rel="alternate" hreflang="ja" href="../">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">TrustAuto</a>
+    <span class="status">v1.0.0-preview.1</span>
+    <nav class="site-nav" aria-label="On this page">
+      <a href="#rules">Rules</a>
+      <a href="#design">Design</a>
+      <a href="#use">Usage</a>
+      <a href="#install">Install</a>
+      <a href="#limits">Limits</a>
+      <a class="lang" href="../" lang="ja" hreflang="ja">日本語</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <h1>Stop typing <code>sudo</code>.<span>But only for what you allowed.</span></h1>
+      <p class="lead">TrustAuto is automatic privilege elevation for Linux. Type commands as usual, and whatever your policy allows runs as root. By default, unknown or high-risk commands ask for approval or are refused.</p>
+
+      <div class="terminal">
+        <div class="terminal-bar">bash / zsh</div>
+        <table class="verdicts">
+          <tbody>
+            <tr>
+              <th scope="row">journalctl -u nginx --no-pager</th>
+              <td class="why">Allowed by a rule. Runs with no password</td>
+              <td class="tag-cell"><span class="tag root">root</span></td>
+            </tr>
+            <tr>
+              <th scope="row">apt search vim</th>
+              <td class="why">Needs no privileges. Runs as you</td>
+              <td class="tag-cell"><span class="tag user">user</span></td>
+            </tr>
+            <tr>
+              <th scope="row">apt install ./evil.deb</th>
+              <td class="why">Fits no typed rule. Asks an approver</td>
+              <td class="tag-cell"><span class="tag ask">ask</span></td>
+            </tr>
+            <tr>
+              <th scope="row">trustauto run -- mkfs -t ext4 /dev/sda</th>
+              <td class="why">Matches a deny rule. Does not run</td>
+              <td class="tag-cell"><span class="tag deny">deny</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <section id="rules">
+    <div class="wrap">
+      <h2>By default, if no rule fits, nothing elevates on its own</h2>
+      <p class="section-lead">Five kinds of rule decide the outcome. When several match, the strictest wins, whatever their order in the file.</p>
+
+      <ol class="order">
+        <li><span class="peek deny" aria-hidden="true"><span>0 0</span><span class="verdict">&gt; &lt;</span></span><span class="tag deny">deny</span><code>deny</code><p>Never runs, in any mode.</p></li>
+        <li><span class="peek ask" aria-hidden="true"><span>0 0</span><span class="verdict">? ?</span></span><span class="tag ask">ask</span><code>ask</code><p>Always asks for approval.</p></li>
+        <li><span class="peek root" aria-hidden="true"><span>0 0</span><span class="verdict">^ ^</span></span><span class="tag root">root</span><code>allow</code><p>Elevates right away. In the default <code>hybrid</code>, asks for approval if ML scores the risk high.</p></li>
+        <li><span class="peek ask" aria-hidden="true"><span>0 0</span><span class="verdict">? ?</span></span><span class="tag ask">ask</span><code>envelope</code><p>Sets a range only. In the default <code>hybrid</code>, elevates only when ML scores the risk low, and asks otherwise.</p></li>
+        <li><span class="peek user" aria-hidden="true"><span>0 0</span><span class="verdict">0 0</span></span><span class="tag user">user</span><code>user</code><p>Runs without elevating.</p></li>
+      </ol>
+      <p class="order-caption">Rules listed first take priority</p>
+
+      <div class="two">
+        <div>
+          <h3>Typed arguments stop option injection</h3>
+          <p>A deny list can never be complete. <code>apt-get -o ...</code> and <code>find -exec</code> are ordinary commands that can reach a root shell.</p>
+          <p>So your policy spells out each allowed command and the shape of its arguments. <code>{pkg}</code> and <code>{unit}</code> never match a value starting with <code>-</code>, so an option cannot slip in.</p>
+        </div>
+        <pre class="block" tabindex="0"><span class="c"># /etc/trustauto/policy.toml</span>
+[[rule]]
+<span class="k">id</span> = <span class="v">"journal-unit"</span>
+<span class="k">action</span> = <span class="v">"allow"</span>
+<span class="k">bin</span> = <span class="v">"/usr/bin/journalctl"</span>
+<span class="k">args</span> = [<span class="v">"-u"</span>, <span class="v">"{unit}"</span>, <span class="v">"--no-pager"</span>]
+
+[[rule]]
+<span class="k">id</span> = <span class="v">"no-mkfs"</span>
+<span class="k">action</span> = <span class="v">"deny"</span>
+<span class="k">bin</span> = <span class="v">"/usr/sbin/mkfs"</span>
+<span class="k">args</span> = [<span class="v">"{any}*"</span>]</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="design">
+    <div class="wrap">
+      <h2>No daemon. It runs only when you type a command</h2>
+      <p class="section-lead">The code that runs as root is a separate small broker. It trusts nothing from the shell side, decides again for itself, then replaces itself with the command.</p>
+
+      <pre class="flow" tabindex="0">shell function → trustauto <span class="dim">(unprivileged)</span>
+                  ├─ user verdict → runs as you
+                  └─ <span class="up">trustauto-broker (setuid root)</span>
+                       ├ decides again
+                       ├ writes the audit log <span class="dim">(no log, no elevation)</span>
+                       ├ asks for PAM approval if needed
+                       └ replaces itself with the command</pre>
+
+      <dl class="facts">
+        <div><dt>0 MB</dt><dd>Extra memory when idle. There is no background process.</dd></div>
+        <div><dt>0.2 µs</dt><dd>Time for a decision the rules settle alone (p99, Linux VM). A decision that uses ML takes about 7 ms, plus about 26 ms to read the machine facts index built in advance. Excludes process start and policy parsing.</dd></div>
+        <div><dt>Audit log</dt><dd>Records each elevate, ask and deny verdict with its reason. If the log cannot be written, nothing elevates. <code>user</code> verdicts, which never elevate, are not recorded.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="use">
+    <div class="wrap">
+      <h2>See what would happen before it happens</h2>
+      <p class="section-lead">Most of the time you just type as usual. These commands are for when you want the reason, or want it off for a while.</p>
+      <table class="commands">
+        <tbody>
+          <tr><th scope="row"><code>trustauto explain -- apt install htop</code></th><td>Shows the verdict and reason without running anything.</td></tr>
+          <tr><th scope="row"><code>trustauto history 20</code></th><td>Shows past verdicts. Approvers see everyone's, others see their own.</td></tr>
+          <tr><th scope="row"><code>trustauto off</code> / <code>on</code></th><td>Turns your own automatic elevation off or on. Open shells follow right away.</td></tr>
+          <tr><th scope="row"><code>trustauto setting</code></th><td>Shows whether it is on, the current mode, the state of the model and machine facts, and the network check.</td></tr>
+          <tr><th scope="row"><code>trustauto check</code></th><td>Validates the policy file.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <h2>Install</h2>
+      <p class="section-lead">For now you build from source. These steps assume Debian or Ubuntu.</p>
+      <ol class="steps">
+        <li>
+          <h3>Build and install</h3>
+          <pre class="block" tabindex="0">sudo apt install build-essential libpam0g-dev cargo
+cargo build --release
+sudo scripts/install.sh</pre>
+        </li>
+        <li>
+          <h3>Set the policy</h3>
+          <p>Edit <code>/etc/trustauto/policy.toml</code> and list your approvers in <code>approval.approvers</code>. If it stays empty, everything that needs approval is refused.</p>
+          <pre class="block" tabindex="0">trustauto check</pre>
+        </li>
+        <li>
+          <h3>Add users to the group</h3>
+          <pre class="block" tabindex="0">sudo usermod -aG trustauto USERNAME</pre>
+          <p>Then log in again. Adding someone to this group hands them everything the policy allows.</p>
+        </li>
+        <li>
+          <h3>Load it in your shell</h3>
+          <p>Add this to <code>~/.bashrc</code>. For zsh, add it to <code>~/.zshrc</code> with <code>bash</code> changed to <code>zsh</code>.</p>
+          <pre class="block" tabindex="0">eval "$(trustauto shell-init bash)"</pre>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="limits">
+    <div class="wrap">
+      <h2>Before you install</h2>
+      <p class="section-lead">This tool deals with root, so here is what it cannot do.</p>
+      <ul class="limits">
+        <li class="first">
+          <h3>What you allow is open to every program that user runs</h3>
+          <p>Elevating without a password means it cannot tell a person from malware. Put in <code>allow</code> only what you could accept malware running as that user doing. Requiring a terminal stops most background jobs, but not ones that use a pseudo-terminal.</p>
+        </li>
+        <li>
+          <h3>Commands that reach the network always ask</h3>
+          <p><code>apt update</code>, <code>apt install</code>, <code>curl</code>, <code>git pull</code>, anything with a URL and the like need approval in every mode, even with an <code>allow</code> rule. Set <code>ask = false</code> under <code>[network]</code> in <code>policy.toml</code> if you do not want this.</p>
+        </li>
+        <li>
+          <h3>No external audit</h3>
+          <p>For v1.0.0-preview.1, all 175 integration tests pass on one Ubuntu 26.04 (arm64) VM. Review it before installing on a machine you depend on.</p>
+        </li>
+        <li>
+          <h3>Exit codes are not recorded</h3>
+          <p>The broker replaces itself with the command, so the history stops at the start.</p>
+        </li>
+        <li>
+          <h3>Always runs in <code>/</code></h3>
+          <p>Relative path arguments do not work in elevated commands.</p>
+        </li>
+        <li>
+          <h3>Approval happens on the requesting terminal</h3>
+          <p>An approver on another terminal is not supported.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ml">
+    <div class="wrap">
+      <h2>ML mode (research)</h2>
+      <!-- Measured results from the final test, how they were measured, and their date replace the development figure below. -->
+      <p class="section-lead">The default, <code>hybrid</code>, uses the ML risk score only inside the range your rules set. Whatever the model says, a command outside <code>allow</code> and <code>envelope</code> never elevates on its own. <code>ml</code>, which leaves commands outside the rules to ML as well, can be chosen as a preview.</p>
+      <table class="commands">
+        <tbody>
+          <tr><th scope="row"><code>rule</code></th><td>Rules alone. <code>allow</code> elevates on the spot; <code>envelope</code> asks for approval.</td></tr>
+          <tr><th scope="row"><code>hybrid</code> (default)</th><td>Rules and ML. <code>allow</code> elevates unless the risk score is high; <code>envelope</code> elevates only when it is low.</td></tr>
+          <tr><th scope="row"><code>ml</code> (preview, high risk)</th><td>ML alone. A command that needs root elevates whenever the score is low, with or without a rule.</td></tr>
+        </tbody>
+      </table>
+      <p class="note">The model has not met its pass mark. Measured on four development machines, it let through 8 of 217 dangerous groups on a machine it had not seen (95% upper bound 6.6%) and allowed 71.2% of harmless commands automatically. There has been no final test on an independent machine yet.</p>
+      <p class="note">In every mode, <code>deny</code> and <code>ask</code> come first. Even in <code>ml</code>, shells, interpreters and kernel or disk tools always ask, and so, by default, do programs the model had few training examples of.</p>
+      <p class="note">ML reads the machine facts that <code>trustauto-facts</code> collects. If they are missing or more than 8 days old, everything that would go through ML asks an approver, and in the default <code>hybrid</code> that includes <code>allow</code> commands. Change the mode with <code>sudo trustauto mode rule|hybrid|ml</code>; <code>trustauto setting</code> shows the current state.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">TrustAuto</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,7 @@
+known_ext_boost machine rows 8297 {'teacher_allow': 664, 'risky': 1550, 'review': 3928, 'teacher_deny': 526, 'harmless': 1629} risky groups 217
+  deb137: train 2615, test 3248, limit 0.2981, 6s
+  ubu2610: train 2578, test 3291, limit 0.2119, 6s
+  ubu24: train 3925, test 879, limit 0.3866, 9s
+  deb14: train 3989, test 879, limit 0.3279, 9s
+{"model": "known_ext_boost", "split": "machine", "machines": ["deb137", "ubu2610", "ubu24", "deb14"], "verdict": "FAIL", "auc": 0.851022883585546, "risky_rows": [19, 1550], "risky_groups": [9, 217], "risky_bound": 0.07125707189266202, "harmless_auto": 0.6301788050588748, "unchanged": [1102, 1629], "changed_allowed_by_gemini": [343, 664], "denied_by_gemini": [18, 526], "review": [877, 3928]}
+{"bytes": 457141, "ms_median": 1.8592090345919132, "ms_p99": 3.324249992147088, "risk_model_bytes": 840165, "risk_model_ms_p99": 0.7431670092046261}

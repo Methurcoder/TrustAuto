@@ -1,0 +1,82 @@
+{
+ "model": "known_ext_general_facts_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8315752187334822,
+ "risky_rows": [
+  3,
+  998
+ ],
+ "risky_groups": [
+  3,
+  192
+ ],
+ "risky_bound": 0.03988613980158268,
+ "harmless_auto": 0.5304304799604156,
+ "unchanged": [
+  820,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  252,
+  664
+ ],
+ "denied_by_gemini": [
+  2,
+  526
+ ],
+ "review": [
+  371,
+  2994
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "chown",
+    "-R",
+    "root:root",
+    "/etc/ssh"
+   ],
+   [
+    "change:ssh_config"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "systemctl",
+    "enable",
+    "systemd-networkd"
+   ],
+   [
+    "check:boot",
+    "check:multi_user",
+    "check:role_http"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "sed",
+    "--in-place",
+    "/^[[:space:]]*$/d",
+    "/etc/ssh/ssh_host_ecdsa_key.pub"
+   ],
+   [
+    "change:ssh_config"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 166921,
+  "ms_median": 0.8487919112667441,
+  "ms_p99": 1.472792006097734,
+  "risk_model_bytes": 840165,
+  "risk_model_ms_p99": 0.51183404866606
+ }
+}

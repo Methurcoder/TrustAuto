@@ -1,0 +1,162 @@
+{
+ "model": "boost",
+ "split": "operation",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.6056813691785488,
+ "risky_rows": [
+  12,
+  574
+ ],
+ "risky_groups": [
+  5,
+  161
+ ],
+ "risky_bound": 0.06418543002249828,
+ "harmless_auto": 0.02782193958664547,
+ "unchanged": [
+  33,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  2,
+  357
+ ],
+ "denied_by_gemini": [
+  2,
+  448
+ ],
+ "review": [
+  31,
+  2090
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "a2query",
+    "-M"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "a2query",
+    "-m"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "cpan",
+    "-u"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "capsh",
+    "--"
+   ],
+   [
+    "started:bash"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "a2query",
+    "-v"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "dbus-daemon",
+    "--system"
+   ],
+   [
+    "check:dbus",
+    "check:multi_user"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "systemd-firstboot",
+    "--reset"
+   ],
+   [
+    "check:boot",
+    "check:multi_user",
+    "check:role_http"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "dbus-daemon",
+    "--system"
+   ],
+   [
+    "check:dbus",
+    "check:multi_user"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "cpan",
+    "-u"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "capsh",
+    "--"
+   ],
+   [
+    "started:bash"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "cpan",
+    "-r"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "cpan",
+    "-r"
+   ],
+   [
+    "started:sh"
+   ]
+  ]
+ ]
+}

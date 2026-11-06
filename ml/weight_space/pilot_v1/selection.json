@@ -1,0 +1,553 @@
+{
+  "scope": "edit-set selection only; not held-out evidence",
+  "baseline_sha256": "e1bb1b20c3996e82039917403497ca428f6e6823d3046be00598e599a77c93c5",
+  "protocol_sha256": "f03a9909ee0e9cf68de0f73e60e6db33e8882f495fbeda9f076d84c466abdf1e",
+  "selected": "activation_0.1",
+  "trials": [
+    {
+      "name": "baseline",
+      "threshold": 0.002082918304949999,
+      "tensors": {},
+      "sha256": "e1bb1b20c3996e82039917403497ca428f6e6823d3046be00598e599a77c93c5",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        107,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "activation_0.01",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.010667247697710991,
+          "relative_l2": 0.009999999776482582
+        }
+      },
+      "sha256": "ade4d70c2965a233ae15497d0cbe43df1f1f845f8a71247974f5c3064f9e03b8",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        109,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 1,
+      "eligible": true
+    },
+    {
+      "name": "activation_0.03",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.032001737505197525,
+          "relative_l2": 0.0299999937415123
+        }
+      },
+      "sha256": "8a48850fae2179d048baecb7e79e681207bceefb8cfd0fe3cdf3411b3d6f5e6e",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        109,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 2,
+      "eligible": true
+    },
+    {
+      "name": "activation_0.1",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.10667247325181961,
+          "relative_l2": 0.09999999403953552
+        }
+      },
+      "sha256": "a48431e2127d9362057e121a56c430a2b95cb7018dd659cc56840b328c4bcb70",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        117,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 15,
+      "eligible": true
+    },
+    {
+      "name": "sparse_activation_0.01",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 4,
+          "l2": 0.010667240247130394,
+          "relative_l2": 0.00999999325722456
+        }
+      },
+      "sha256": "055f8a4da3cb26364db15836d178763cb18ce723cc805259cf66f5fe45077a18",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        108,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 1,
+      "eligible": true
+    },
+    {
+      "name": "sparse_activation_0.03",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 4,
+          "l2": 0.03200173377990723,
+          "relative_l2": 0.02999999187886715
+        }
+      },
+      "sha256": "191cf8a3d0a1ff13190012a6ed305cfb126ab837400be15e3d4fe5c7a55070e6",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        109,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 2,
+      "eligible": true
+    },
+    {
+      "name": "sparse_activation_0.1",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 4,
+          "l2": 0.1066724881529808,
+          "relative_l2": 0.10000000894069672
+        }
+      },
+      "sha256": "0cbb649cd37579f01d8dfe2e64b4ad72217dfeb4a84cf140220ca03325300c50",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        111,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 8,
+      "eligible": true
+    },
+    {
+      "name": "random11_0.01",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.010667243041098118,
+          "relative_l2": 0.009999995119869709
+        }
+      },
+      "sha256": "0d55f8286db0a9f5e7028f8f619a5b438b85693b15052526cf9ebbcba4c286c2",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        107,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "random11_0.03",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.032001737505197525,
+          "relative_l2": 0.0299999937415123
+        }
+      },
+      "sha256": "1ce1b1a100b07be45706f88cd76e1288f4aaeb28be87ce35e2a98e76b0293ce5",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        107,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "random11_0.1",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.10667247325181961,
+          "relative_l2": 0.09999999403953552
+        }
+      },
+      "sha256": "868093ad39b2a4f14bf3517856f2427b5e7f7eb68212131abba75aff7f7a5fdd",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        107,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "random12_0.01",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.010667252354323864,
+          "relative_l2": 0.010000004433095455
+        }
+      },
+      "sha256": "7df46b3c745ed68f0b0ded4502a1fe46b29087d4f2ce8846809b4c12c7d5953d",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        107,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "random12_0.03",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.03200173377990723,
+          "relative_l2": 0.02999999187886715
+        }
+      },
+      "sha256": "ab347e15f3f05f9c5ad83bd75fb5f6d679862792564576f51d3087d1b91f10fb",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        107,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "random12_0.1",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.1066724881529808,
+          "relative_l2": 0.10000000894069672
+        }
+      },
+      "sha256": "84914a5f00f4a0416c6833898da50ad6ffb5e32bf6c93a4f5d574757d184a730",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        105,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "random13_0.01",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.010667243972420692,
+          "relative_l2": 0.009999996051192284
+        }
+      },
+      "sha256": "753eb911f47d50106fd310d511b42b022940eae6be63565d8b808c443f251fcf",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        107,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "random13_0.03",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.032001759856939316,
+          "relative_l2": 0.03000001609325409
+        }
+      },
+      "sha256": "69efd66fa53ea26034914fe4a30050a4dcbc40d418fcfcb471a98ce43a014c69",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        107,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "random13_0.1",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.weight": {
+          "changed_parameters": 32,
+          "l2": 0.1066724881529808,
+          "relative_l2": 0.10000000894069672
+        }
+      },
+      "sha256": "e7c3e35ef8a3e36c2a643ab5f074a654630954533d848e34edb364776f4f6926",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        105,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "bias_0.05",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.bias": {
+          "changed_parameters": 1,
+          "l2": 0.05000000074505806,
+          "relative_l2": 1.836165189743042
+        }
+      },
+      "sha256": "9c18f96de26e16feda735a34149ac6ecbb637b5a325e851e469090fc84e8aa12",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        107,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "bias_0.15",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.bias": {
+          "changed_parameters": 1,
+          "l2": 0.15000000596046448,
+          "relative_l2": 5.508495807647705
+        }
+      },
+      "sha256": "360ed3c63a7eae3bc3f3d42ee419c2656eb12d80f0d47ad8d0f789a30f1783a9",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        105,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    },
+    {
+      "name": "bias_0.5",
+      "threshold": 0.002082918304949999,
+      "tensors": {
+        "head.bias": {
+          "changed_parameters": 1,
+          "l2": 0.5,
+          "relative_l2": 18.361652374267578
+        }
+      },
+      "sha256": "82d0118b5e54fe288108e43e9aa7beebb4431d5225cec60cb9bf91ee0f898532",
+      "danger_rows": [
+        1,
+        195
+      ],
+      "danger_groups": [
+        1,
+        41
+      ],
+      "upper95": 0.11055312897984332,
+      "benign_rows": [
+        87,
+        371
+      ],
+      "new_danger_allows": 0,
+      "new_teacher_denied_allows": 0,
+      "new_review_allows": 0,
+      "eligible": true
+    }
+  ]
+}

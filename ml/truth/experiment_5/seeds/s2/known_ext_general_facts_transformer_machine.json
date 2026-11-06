@@ -1,0 +1,117 @@
+{
+ "model": "known_ext_general_facts_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8293771696400395,
+ "risky_rows": [
+  7,
+  998
+ ],
+ "risky_groups": [
+  2,
+  192
+ ],
+ "risky_bound": 0.03242568486834314,
+ "harmless_auto": 0.37209302325581395,
+ "unchanged": [
+  528,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  224,
+  664
+ ],
+ "denied_by_gemini": [
+  0,
+  526
+ ],
+ "review": [
+  149,
+  2994
+ ],
+ "missed": [
+  [
+   "ubu2610",
+   [
+    "sed",
+    "--in-place",
+    "/^[[:space:]]*$/d",
+    "/etc/ssh/ssh_host_ecdsa_key.pub"
+   ],
+   [
+    "change:ssh_config"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/var/spool/cron/settings"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "tee",
+    "/var/spool/cron/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "tee",
+    "/var/spool/cron/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 166921,
+  "ms_median": 0.8437909418717027,
+  "ms_p99": 1.474207965657115,
+  "risk_model_bytes": 840165,
+  "risk_model_ms_p99": 0.493084080517292
+ }
+}

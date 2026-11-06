@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="robots" content="noindex">
+<title>TrustAuto</title>
+<meta name="description" content="Linux 向けの、常駐しない自動権限昇格ツール。管理者が許可した範囲のコマンドは、sudo と打たなくても root で実行されます。">
+<link rel="alternate" hreflang="en" href="en/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">TrustAuto</a>
+    <span class="status">v1.0.0-preview.1</span>
+    <nav class="site-nav" aria-label="ページ内">
+      <a href="#rules">判定</a>
+      <a href="#design">仕組み</a>
+      <a href="#use">使い方</a>
+      <a href="#install">導入</a>
+      <a href="#limits">制限</a>
+      <a class="lang" href="en/" lang="en" hreflang="en">English</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <h1><code>sudo</code> を打たなくていい。<span>ただし、許可した範囲だけ。</span></h1>
+      <p class="lead">TrustAuto は Linux 向けの自動権限昇格ツールです。普段どおりにコマンドを打つだけで、管理者がポリシーで許可した操作は root で動きます。既定では、未知のコマンドや高リスクの操作は、承認を求めるか拒否します。</p>
+
+      <div class="terminal">
+        <div class="terminal-bar">bash / zsh</div>
+        <table class="verdicts">
+          <tbody>
+            <tr>
+              <th scope="row">journalctl -u nginx --no-pager</th>
+              <td class="why">ルールで許可。パスワードなしで実行</td>
+              <td class="tag-cell"><span class="tag root">root</span></td>
+            </tr>
+            <tr>
+              <th scope="row">apt search vim</th>
+              <td class="why">権限が要らない。ユーザー権限のまま実行</td>
+              <td class="tag-cell"><span class="tag user">user</span></td>
+            </tr>
+            <tr>
+              <th scope="row">apt install ./evil.deb</th>
+              <td class="why">型付きルールに合わない。管理者の承認を要求</td>
+              <td class="tag-cell"><span class="tag ask">承認</span></td>
+            </tr>
+            <tr>
+              <th scope="row">trustauto run -- mkfs -t ext4 /dev/sda</th>
+              <td class="why">拒否ルールに一致。実行しない</td>
+              <td class="tag-cell"><span class="tag deny">拒否</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <section id="rules">
+    <div class="wrap">
+      <h2>既定では、どのルールにも合わなければ自動で昇格しません</h2>
+      <p class="section-lead">判定は 5 種類のルールで決まります。複数に一致したら厳しいほうを採用し、ファイルに書いた順番には左右されません。</p>
+
+      <ol class="order">
+        <li><span class="peek deny" aria-hidden="true"><span>0 0</span><span class="verdict">&gt; &lt;</span></span><span class="tag deny">拒否</span><code>deny</code><p>どのモードでも実行しません。</p></li>
+        <li><span class="peek ask" aria-hidden="true"><span>0 0</span><span class="verdict">? ?</span></span><span class="tag ask">承認</span><code>ask</code><p>常に承認を求めます。</p></li>
+        <li><span class="peek root" aria-hidden="true"><span>0 0</span><span class="verdict">^ ^</span></span><span class="tag root">root</span><code>allow</code><p>その場で昇格します。既定の <code>hybrid</code> では、ML がリスクが高いと判定したら承認を求めます。</p></li>
+        <li><span class="peek ask" aria-hidden="true"><span>0 0</span><span class="verdict">? ?</span></span><span class="tag ask">承認</span><code>envelope</code><p>範囲だけを決めておきます。既定の <code>hybrid</code> では、ML がリスクが低いと判定したときだけ昇格し、それ以外は承認を求めます。</p></li>
+        <li><span class="peek user" aria-hidden="true"><span>0 0</span><span class="verdict">0 0</span></span><span class="tag user">user</span><code>user</code><p>権限を上げずに実行します。</p></li>
+      </ol>
+      <p class="order-caption">先に並んでいるルールほど優先されます</p>
+
+      <div class="two">
+        <div>
+          <h3>オプションの注入を、型で防ぎます</h3>
+          <p>拒否リストは完全にできません。<code>apt-get -o ...</code> や <code>find -exec</code> のように、普通のコマンドから root シェルに抜ける道があるからです。</p>
+          <p>そこで、許可するコマンドと引数の形をポリシーに書きます。<code>{pkg}</code> や <code>{unit}</code> は <code>-</code> で始まる値に一致しないので、オプションを紛れ込ませることはできません。</p>
+        </div>
+        <pre class="block" tabindex="0"><span class="c"># /etc/trustauto/policy.toml</span>
+[[rule]]
+<span class="k">id</span> = <span class="v">"journal-unit"</span>
+<span class="k">action</span> = <span class="v">"allow"</span>
+<span class="k">bin</span> = <span class="v">"/usr/bin/journalctl"</span>
+<span class="k">args</span> = [<span class="v">"-u"</span>, <span class="v">"{unit}"</span>, <span class="v">"--no-pager"</span>]
+
+[[rule]]
+<span class="k">id</span> = <span class="v">"no-mkfs"</span>
+<span class="k">action</span> = <span class="v">"deny"</span>
+<span class="k">bin</span> = <span class="v">"/usr/sbin/mkfs"</span>
+<span class="k">args</span> = [<span class="v">"{any}*"</span>]</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="design">
+    <div class="wrap">
+      <h2>常駐せず、コマンドを打った瞬間だけ動きます</h2>
+      <p class="section-lead">root で動くコードは小さなブローカーに分けてあります。シェル側の判定を信用せず、自分で判定し直してから、実行するコマンドに置き換わります。</p>
+
+      <pre class="flow" tabindex="0">シェル関数 → trustauto <span class="dim">（権限なし）</span>
+              ├─ user の判定 → ユーザー権限でそのまま実行
+              └─ <span class="up">trustauto-broker（setuid root）</span>
+                   ├ 判定をやり直す
+                   ├ 監査ログを書く <span class="dim">（失敗したら昇格しない）</span>
+                   ├ 必要なら PAM で承認を取る
+                   └ 実行するコマンドに置き換わる</pre>
+
+      <dl class="facts">
+        <div><dt>0 MB</dt><dd>アイドル時の追加メモリ。常駐プロセスはありません。</dd></div>
+        <div><dt>0.2 µs</dt><dd>ルールだけで決まる判定の時間（p99、Linux VM）。ML を使う判定は約 7 ms で、前もって作った機械の情報の索引の読み込みに約 26 ms かかります。プロセスの起動とポリシーの解析は含みません。</dd></div>
+        <div><dt>監査ログ</dt><dd>昇格、承認、拒否の判定と理由を記録します。ログを書けなければ昇格しません。権限を上げない <code>user</code> の判定は記録しません。</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="use">
+    <div class="wrap">
+      <h2>何が起きるかは、実行する前に確かめられます</h2>
+      <p class="section-lead">普段はいつもどおりに打つだけです。判定の理由を見たいときや、一時的に止めたいときに次のコマンドを使います。</p>
+      <table class="commands">
+        <tbody>
+          <tr><th scope="row"><code>trustauto explain -- apt install htop</code></th><td>実行せずに、判定と理由だけを表示します。</td></tr>
+          <tr><th scope="row"><code>trustauto history 20</code></th><td>判定の履歴を表示します。承認者は全員分、それ以外は自分の分だけ見られます。</td></tr>
+          <tr><th scope="row"><code>trustauto off</code> / <code>on</code></th><td>自分の自動昇格を切り替えます。開いているシェルにもすぐ反映されます。</td></tr>
+          <tr><th scope="row"><code>trustauto setting</code></th><td>オンかオフか、今のモード、モデルと機械の情報の状態、外部通信の確認を表示します。</td></tr>
+          <tr><th scope="row"><code>trustauto check</code></th><td>ポリシーの書き方を検証します。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <h2>導入</h2>
+      <p class="section-lead">今はソースからビルドします。Debian と Ubuntu を想定した手順です。</p>
+      <ol class="steps">
+        <li>
+          <h3>ビルドしてインストールする</h3>
+          <pre class="block" tabindex="0">sudo apt install build-essential libpam0g-dev cargo
+cargo build --release
+sudo scripts/install.sh</pre>
+        </li>
+        <li>
+          <h3>ポリシーを設定する</h3>
+          <p><code>/etc/trustauto/policy.toml</code> を編集し、<code>approval.approvers</code> に承認者を書きます。空のままだと、承認が必要な操作はすべて拒否されます。</p>
+          <pre class="block" tabindex="0">trustauto check</pre>
+        </li>
+        <li>
+          <h3>使うユーザーをグループに入れる</h3>
+          <pre class="block" tabindex="0">sudo usermod -aG trustauto ユーザー名</pre>
+          <p>入れたあと、ログインし直します。グループに入れることは、ポリシーの許可範囲をそのユーザーに渡すことと同じです。</p>
+        </li>
+        <li>
+          <h3>シェルに読み込ませる</h3>
+          <p><code>~/.bashrc</code> に追加します。zsh なら <code>~/.zshrc</code> に、<code>bash</code> を <code>zsh</code> に変えて追加します。</p>
+          <pre class="block" tabindex="0">eval "$(trustauto shell-init bash)"</pre>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="limits">
+    <div class="wrap">
+      <h2>入れる前に知っておいてください</h2>
+      <p class="section-lead">root に関わるツールなので、できないことも先に書いておきます。</p>
+      <ul class="limits">
+        <li class="first">
+          <h3>許可した範囲は、そのユーザーの全プログラムにも開かれます</h3>
+          <p>パスワードなしで昇格できるので、人とマルウェアを区別できません。<code>allow</code> には、そのユーザーの権限で動くマルウェアに実行されても許容できる操作だけを入れてください。端末を要求する設定で多くのバックグラウンド実行は止まりますが、疑似端末を使うものは止まりません。</p>
+        </li>
+        <li>
+          <h3>外部と通信するコマンドは、毎回承認を求めます</h3>
+          <p><code>apt update</code>、<code>apt install</code>、<code>curl</code>、<code>git pull</code>、URL を含むものなどは、<code>allow</code> ルールがあっても、どのモードでも承認が必要です。不要なら <code>policy.toml</code> の <code>[network]</code> で <code>ask = false</code> にします。</p>
+        </li>
+        <li>
+          <h3>外部の監査は受けていません</h3>
+          <p>v1.0.0-preview.1 の統合テストは、Ubuntu 26.04（arm64）の VM 1 環境で 175 件すべて合格です。普段使いのマシンに入れる前に、内容を確認してください。</p>
+        </li>
+        <li>
+          <h3>終了コードは記録しません</h3>
+          <p>実行するコマンドに置き換わるので、履歴に残るのは開始までです。</p>
+        </li>
+        <li>
+          <h3>常に <code>/</code> で実行します</h3>
+          <p>昇格したコマンドでは、相対パスの引数は動きません。</p>
+        </li>
+        <li>
+          <h3>承認は要求元の端末で行います</h3>
+          <p>別の端末にいる承認者には対応していません。</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ml">
+    <div class="wrap">
+      <h2>ML モード（研究中）</h2>
+      <!-- Measured results from the final test, how they were measured, and their date replace the development figure below. -->
+      <p class="section-lead">既定の <code>hybrid</code> は、ルールで決めた範囲の中だけ ML のリスク判定を使います。ML がどう判定しても、<code>allow</code> と <code>envelope</code> の外にあるコマンドは自動では昇格しません。ルールの外まで ML に任せる <code>ml</code> は、プレビューとして選べます。</p>
+      <table class="commands">
+        <tbody>
+          <tr><th scope="row"><code>rule</code></th><td>ルールだけで判定します。<code>allow</code> はその場で昇格し、<code>envelope</code> は承認を求めます。</td></tr>
+          <tr><th scope="row"><code>hybrid</code>（既定）</th><td>ルールと ML で判定します。<code>allow</code> はリスクが高いと判定しない限り昇格し、<code>envelope</code> はリスクが低いと判定したときだけ昇格します。</td></tr>
+          <tr><th scope="row"><code>ml</code>（プレビュー、高リスク）</th><td>ML だけで判定します。root が必要なコマンドは、ルールがなくても、リスクが低いと判定すれば昇格します。</td></tr>
+        </tbody>
+      </table>
+      <p class="note">モデルはまだ合格基準を満たしていません。開発用の 4 台で測ったところ、未見の機械で危険な操作の見逃しが 217 グループ中 8 件（95% 上限 6.6%）、無害な操作の自動許可が 71.2% でした。独立した機械での最終テストはまだです。</p>
+      <p class="note">どのモードでも <code>deny</code> と <code>ask</code> が先に効きます。<code>ml</code> でも、シェル、インタープリター、カーネルやディスクを操作するツールは必ず承認を求め、学習例が少ないプログラムも既定では承認を求めます。</p>
+      <p class="note">ML は <code>trustauto-facts</code> が集める機械の情報を使います。情報がない、または 8 日より古いと、ML を通る判定はすべて承認待ちになり、既定の <code>hybrid</code> では <code>allow</code> のコマンドも承認を求めます。モードは <code>sudo trustauto mode rule|hybrid|ml</code> で変え、今の状態は <code>trustauto setting</code> で確かめられます。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">TrustAuto</div>
+</footer>
+</body>
+</html>

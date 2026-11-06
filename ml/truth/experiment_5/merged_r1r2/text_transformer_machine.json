@@ -1,0 +1,52 @@
+{
+ "model": "text_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.9044952673692428,
+ "risky_rows": [
+  1,
+  694
+ ],
+ "risky_groups": [
+  1,
+  174
+ ],
+ "risky_bound": 0.02697203060597836,
+ "harmless_auto": 0.01011904761904762,
+ "unchanged": [
+  16,
+  1270
+ ],
+ "changed_allowed_by_gemini": [
+  1,
+  410
+ ],
+ "denied_by_gemini": [
+  0,
+  526
+ ],
+ "review": [
+  8,
+  2936
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "crontab"
+   ],
+   [
+    "change:persistence"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 203404,
+  "ms_median": 0.6645419634878635,
+  "ms_p99": 1.0108749847859144
+ }
+}

@@ -1,0 +1,169 @@
+{
+ "model": "known_boost",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610",
+  "ubu24",
+  "deb14"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8543556791340319,
+ "risky_rows": [
+  11,
+  1550
+ ],
+ "risky_groups": [
+  7,
+  217
+ ],
+ "risky_bound": 0.059733939594803276,
+ "harmless_auto": 0.6000872219799389,
+ "unchanged": [
+  1035,
+  1629
+ ],
+ "changed_allowed_by_gemini": [
+  341,
+  664
+ ],
+ "denied_by_gemini": [
+  14,
+  526
+ ],
+ "review": [
+  812,
+  3928
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "touch",
+    ".bash_profile"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "touch",
+    ".bash_profile"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "apt-get",
+    "update"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "apt",
+    "upgrade"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "systemctl",
+    "start",
+    "rescue"
+   ],
+   [
+    "check:multi_user"
+   ]
+  ],
+  [
+   "ubu24",
+   [
+    "apachectl",
+    "stop"
+   ],
+   [
+    "check:role_http",
+    "check:role_php"
+   ]
+  ],
+  [
+   "ubu24",
+   [
+    "apt",
+    "upgrade"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "mkdir",
+    "-m",
+    "777",
+    "dirname"
+   ],
+   [
+    "change:opened_to_all"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "systemctl",
+    "enable",
+    "systemd-networkd"
+   ],
+   [
+    "check:boot",
+    "check:multi_user",
+    "check:role_http"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "find",
+    ".",
+    "-type",
+    "f",
+    "-exec",
+    "sh",
+    "-c"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "pkill",
+    "-9",
+    "-x",
+    "master"
+   ],
+   [
+    "check:role_smtp"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 433692,
+  "ms_median": 1.9710829947143793,
+  "ms_p99": 3.6624999484047294
+ }
+}

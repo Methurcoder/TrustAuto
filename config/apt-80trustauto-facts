@@ -1,0 +1,2 @@
+// Refresh TrustAuto's machine facts after packages change, without making apt wait.
+DPkg::Post-Invoke { "if [ -d /run/systemd/system ] && [ -x /usr/lib/trustauto/trustauto-facts ]; then systemctl start --no-block trustauto-facts.service >/dev/null 2>&1 || true; fi"; };

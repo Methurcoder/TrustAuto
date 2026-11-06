@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "hashes": {
+    "machine_train.jsonl": "199114105e4dd6f5091a54f9f1906764e857db747f9d57c7db0f89a072657304",
+    "machine_edit.jsonl": "15a75ed3d53ead821f0305c85b71669d568ea3ad5e683dbe148c6d53eecbed3b",
+    "machine_calibration.jsonl": "cf6a93fa4f92fbf30b4e20bc6fb260006a151f413a263162961b8237356af5c5",
+    "machine_evaluation.jsonl": "28f5b916b8527df1501188510033e4afcfcead63abd0e64c025738d8278a5de8",
+    "target_train.jsonl": "1811af34665e922c9724011d8f8bdf312ca9814333994a418eee58cb34c23e68",
+    "target_edit.jsonl": "d3be0030504fa732bf2bd29b8c864fc1acd686f2a3ee4ab2a08fb5a9b9cc82d7",
+    "target_calibration.jsonl": "311ae70a4cd76d9d40f5b3f01a594659ce6f1f30529f7f1be5bfecc69c3b42d3",
+    "target_evaluation.jsonl": "eac514f8313fbcfbef876727a998a23fa9d049bcc558e66cfd2bf26a8e38b30a",
+    "operation_train.jsonl": "4408404ff1b63c9bac3824addf214b6902eed30c174cecb7d6453ebfb8e1484c",
+    "operation_edit.jsonl": "6e73ff0d17cb5b5566aeff35daa71a064d6d38eee912af4c9d5a558a78654d29",
+    "operation_calibration.jsonl": "dda0cbee3de21289990b6c3ea2a30b3eb0ddb0df7a9c6af6ecbc07f239ee42f2",
+    "operation_evaluation.jsonl": "c6b5b6240f30ca1d7aa2b888c51875222ee6505e6843a8cb9a65c3dec11f5371"
+  },
+  "status": "development-only; all four environments previously examined",
+  "rule": "outer held machine deb14, or existing target/operation fold 0; remaining target groups hashed to edit/calibration/train",
+  "evaluation_rule": "do not inspect evaluation labels or use them for edit selection; final independent evidence requires fresh data"
+}

@@ -1,0 +1,40 @@
+== machine
+known_facts_transformer seed1                              risky  1/192 UB  2.4%  harmless  47.5% un 672/1357 ch 288/664 review 256/2994
+known_facts_transformer seed2                              risky  4/192 UB  4.7%  harmless  41.6% un 629/1357 ch 212/664 review 286/2994
+known_facts_transformer seed3                              risky  4/192 UB  4.7%  harmless  54.5% un 779/1357 ch 322/664 review 393/2994
+known_facts_transformer seed4                              risky  8/192 UB  7.4%  harmless  62.0% un 891/1357 ch 363/664 review 352/2994
+known_facts_transformer all 4 seeds agree                  risky  0/192 UB  1.5%  harmless  29.2% un 414/1357 ch 176/664 review 97/2994
+known_ext_facts_transformer seed1                          risky  7/192 UB  6.7%  harmless  58.1% un 843/1357 ch 331/664 review 384/2994
+known_ext_facts_transformer seed2                          risky  2/192 UB  3.2%  harmless  51.8% un 724/1357 ch 323/664 review 261/2994
+known_ext_facts_transformer seed3                          risky  4/192 UB  4.7%  harmless  28.3% un 384/1357 ch 187/664 review 190/2994
+known_ext_facts_transformer seed4                          risky  4/192 UB  4.7%  harmless  29.8% un 425/1357 ch 178/664 review 228/2994
+known_ext_facts_transformer all 4 seeds agree              risky  0/192 UB  1.5%  harmless  15.6% un 199/1357 ch 116/664 review 52/2994
+known_ext_general_facts_transformer seed1                  risky  3/192 UB  4.0%  harmless  53.0% un 820/1357 ch 252/664 review 371/2994
+known_ext_general_facts_transformer seed2                  risky  2/192 UB  3.2%  harmless  37.2% un 528/1357 ch 224/664 review 149/2994
+known_ext_general_facts_transformer seed3                  risky  2/192 UB  3.2%  harmless  35.8% un 532/1357 ch 191/664 review 195/2994
+known_ext_general_facts_transformer seed4                  risky  3/192 UB  4.0%  harmless  47.8% un 732/1357 ch 235/664 review 300/2994
+known_ext_general_facts_transformer all 4 seeds agree      risky  0/192 UB  1.5%  harmless  19.2% un 237/1357 ch 151/664 review 40/2994
+known_ext_boost                                            risky  5/192 UB  5.4%  harmless  56.2% un 789/1357 ch 346/664 review 231/2994
+12 transformers agree                                      risky  0/192 UB  1.5%  harmless   2.8% un 32/1357 ch 25/664 review 6/2994
+12 transformers + boost agree                              risky  0/192 UB  1.5%  harmless   2.6% un 28/1357 ch 24/664 review 4/2994
+   missed groups: []
+== target
+known_facts_transformer seed1                              risky  5/192 UB  5.4%  harmless  37.7% un 497/1357 ch 265/664 review 328/2994
+known_facts_transformer seed2                              risky  7/192 UB  6.7%  harmless  40.1% un 495/1357 ch 316/664 review 261/2994
+known_facts_transformer seed3                              risky  7/192 UB  6.7%  harmless  39.2% un 501/1357 ch 291/664 review 287/2994
+known_facts_transformer seed4                              risky  8/192 UB  7.4%  harmless  38.9% un 495/1357 ch 291/664 review 201/2994
+known_facts_transformer all 4 seeds agree                  risky  2/192 UB  3.2%  harmless  24.8% un 319/1357 ch 182/664 review 104/2994
+known_ext_facts_transformer seed1                          risky  7/192 UB  6.7%  harmless  41.7% un 546/1357 ch 297/664 review 284/2994
+known_ext_facts_transformer seed2                          risky 10/192 UB  8.7%  harmless  44.8% un 570/1357 ch 336/664 review 366/2994
+known_ext_facts_transformer seed3                          risky  8/192 UB  7.4%  harmless  38.9% un 507/1357 ch 280/664 review 268/2994
+known_ext_facts_transformer seed4                          risky 12/192 UB  9.9%  harmless  44.6% un 537/1357 ch 364/664 review 310/2994
+known_ext_facts_transformer all 4 seeds agree              risky  3/192 UB  4.0%  harmless  29.9% un 388/1357 ch 216/664 review 152/2994
+known_ext_general_facts_transformer seed1                  risky  4/192 UB  4.7%  harmless  38.0% un 504/1357 ch 264/664 review 279/2994
+known_ext_general_facts_transformer seed2                  risky  4/192 UB  4.7%  harmless  38.2% un 510/1357 ch 263/664 review 334/2994
+known_ext_general_facts_transformer seed3                  risky  8/192 UB  7.4%  harmless  41.7% un 559/1357 ch 283/664 review 278/2994
+known_ext_general_facts_transformer seed4                  risky  6/192 UB  6.1%  harmless  40.2% un 546/1357 ch 267/664 review 289/2994
+known_ext_general_facts_transformer all 4 seeds agree      risky  3/192 UB  4.0%  harmless  29.8% un 367/1357 ch 235/664 review 159/2994
+known_ext_boost                                            risky  7/192 UB  6.7%  harmless  39.3% un 481/1357 ch 314/664 review 209/2994
+12 transformers agree                                      risky  1/192 UB  2.4%  harmless  17.7% un 211/1357 ch 147/664 review 59/2994
+12 transformers + boost agree                              risky  1/192 UB  2.4%  harmless  15.1% un 169/1357 ch 136/664 review 28/2994
+   missed groups: ['dir:/root/.ssh']

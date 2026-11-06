@@ -1,0 +1,87 @@
+{
+ "model": "known_text_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.7941408079625294,
+ "risky_rows": [
+  4,
+  694
+ ],
+ "risky_groups": [
+  2,
+  174
+ ],
+ "risky_bound": 0.0357386526850308,
+ "harmless_auto": 0.32083333333333336,
+ "unchanged": [
+  457,
+  1270
+ ],
+ "changed_allowed_by_gemini": [
+  82,
+  410
+ ],
+ "denied_by_gemini": [
+  1,
+  526
+ ],
+ "review": [
+  92,
+  2936
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "apt-get",
+    "-y",
+    "--no-install-recommends",
+    "install",
+    "t1-cyrillic"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "apt-get",
+    "update"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "chown",
+    "root:root",
+    "/etc/security/namespace.init"
+   ],
+   [
+    "change:pam"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "apt",
+    "upgrade"
+   ],
+   [
+    "started:sh"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 203404,
+  "ms_median": 0.5957920802757144,
+  "ms_p99": 1.2745829299092293
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "model": "facts_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.9442336171788226,
+ "risky_rows": [
+  3,
+  574
+ ],
+ "risky_groups": [
+  3,
+  161
+ ],
+ "risky_bound": 0.04745250831360665,
+ "harmless_auto": 0.16375198728139906,
+ "unchanged": [
+  118,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  88,
+  357
+ ],
+ "denied_by_gemini": [
+  0,
+  448
+ ],
+ "review": [
+  121,
+  2090
+ ],
+ "missed": [
+  [
+   "ubu2610",
+   [
+    "cp",
+    "/etc/ssh/ssh_host_ecdsa_key",
+    "/tmp/ta-copy"
+   ],
+   [
+    "read_private"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "crontab",
+    "/usr/sbin/swaplabel"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "chroot",
+    "/"
+   ],
+   [
+    "started:sh"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 157065,
+  "ms_median": 0.8634169353172183,
+  "ms_p99": 1.2848750920966268
+ }
+}

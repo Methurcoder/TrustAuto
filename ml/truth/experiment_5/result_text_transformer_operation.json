@@ -1,0 +1,67 @@
+{
+ "model": "text_transformer",
+ "split": "operation",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.6187130350103758,
+ "risky_rows": [
+  3,
+  574
+ ],
+ "risky_groups": [
+  1,
+  161
+ ],
+ "risky_bound": 0.02912461772065672,
+ "harmless_auto": 0.04292527821939587,
+ "unchanged": [
+  53,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  1,
+  357
+ ],
+ "denied_by_gemini": [
+  1,
+  448
+ ],
+ "review": [
+  27,
+  2090
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "script"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "script"
+   ],
+   [
+    "started:bash"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "script",
+    "--timing",
+    "2"
+   ],
+   [
+    "started:bash"
+   ]
+  ]
+ ]
+}

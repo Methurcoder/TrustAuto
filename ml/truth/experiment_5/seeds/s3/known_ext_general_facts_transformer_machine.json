@@ -1,0 +1,68 @@
+{
+ "model": "known_ext_general_facts_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8291261959400053,
+ "risky_rows": [
+  2,
+  998
+ ],
+ "risky_groups": [
+  2,
+  192
+ ],
+ "risky_bound": 0.03242568486834314,
+ "harmless_auto": 0.3577436912419594,
+ "unchanged": [
+  532,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  191,
+  664
+ ],
+ "denied_by_gemini": [
+  1,
+  526
+ ],
+ "review": [
+  195,
+  2994
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "chown",
+    "-R",
+    "root:root",
+    "/etc/ssh"
+   ],
+   [
+    "change:ssh_config"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mv",
+    "/usr/bin/expiry",
+    "/usr/bin/expiry.bak"
+   ],
+   [
+    "change:new_setuid"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 166921,
+  "ms_median": 0.8990000933408737,
+  "ms_p99": 1.6352080274373293,
+  "risk_model_bytes": 840165,
+  "risk_model_ms_p99": 0.4689159104600549
+ }
+}

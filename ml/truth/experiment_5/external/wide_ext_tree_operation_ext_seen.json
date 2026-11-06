@@ -1,0 +1,49 @@
+{
+ "model": "wide_ext_tree",
+ "split": "operation_ext_seen",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.5056343900018356,
+ "risky_rows": [
+  1,
+  574
+ ],
+ "risky_groups": [
+  1,
+  161
+ ],
+ "risky_bound": 0.02912461772065672,
+ "harmless_auto": 0.00397456279809221,
+ "unchanged": [
+  5,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  0,
+  357
+ ],
+ "denied_by_gemini": [
+  11,
+  448
+ ],
+ "review": [
+  5,
+  2090
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "rm",
+    "-f",
+    "/etc/postfix/master.cf"
+   ],
+   [
+    "check:role_smtp"
+   ]
+  ]
+ ]
+}

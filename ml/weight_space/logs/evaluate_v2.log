@@ -1,0 +1,9 @@
+machine   seed1 interp_plain_1.0     danger rows [1, 263]->[1, 263] groups [1, 78]->[1, 78] ub95 0.059->0.059 benign [72, 117]->[77, 117] review 118->129 new_danger 0 fixed 0 adoptable False
+machine   seed2 baseline             danger rows [4, 263]->[4, 263] groups [4, 78]->[4, 78] ub95 0.114->0.114 benign [84, 117]->[84, 117] review 166->166 new_danger 0 fixed 0 adoptable False
+machine   seed3 tftv_L1_0.03         danger rows [2, 263]->[2, 263] groups [2, 78]->[2, 78] ub95 0.079->0.079 benign [78, 117]->[78, 117] review 166->167 new_danger 0 fixed 0 adoptable False
+operation seed1 bias_0.15            danger rows [22, 619]->[21, 619] groups [12, 104]->[11, 104] ub95 0.180->0.169 benign [63, 461]->[51, 461] review 102->84 new_danger 0 fixed 1 adoptable False
+operation seed2 bias_0.15            danger rows [45, 619]->[0, 619] groups [9, 104]->[0, 104] ub95 0.146->0.028 benign [80, 461]->[0, 461] review 88->0 new_danger 0 fixed 45 adoptable False
+operation seed3 meanr1_L1_0.3        danger rows [16, 619]->[0, 619] groups [2, 104]->[0, 104] ub95 0.059->0.028 benign [30, 461]->[26, 461] review 44->34 new_danger 0 fixed 16 adoptable False
+target    seed1 bias_0.5             danger rows [5, 265]->[0, 265] groups [3, 51]->[0, 51] ub95 0.145->0.057 benign [114, 408]->[0, 408] review 94->0 new_danger 0 fixed 5 adoptable False
+target    seed2 bias_0.5             danger rows [11, 265]->[4, 265] groups [5, 51]->[1, 51] ub95 0.195->0.090 benign [169, 408]->[44, 408] review 147->40 new_danger 0 fixed 7 adoptable False
+target    seed3 baseline             danger rows [19, 265]->[19, 265] groups [10, 51]->[10, 51] ub95 0.310->0.310 benign [178, 408]->[178, 408] review 154->154 new_danger 0 fixed 0 adoptable False

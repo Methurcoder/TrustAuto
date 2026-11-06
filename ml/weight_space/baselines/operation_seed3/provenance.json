@@ -1,0 +1,181 @@
+{
+  "scenario": "operation",
+  "seed": 3,
+  "epochs": 30,
+  "train_rows": 2112,
+  "partition_sha256": "4408404ff1b63c9bac3824addf214b6902eed30c174cecb7d6453ebfb8e1484c",
+  "source_sha256": {
+    "train_actions.py": "693e9abc5f94faa1a7c365a2458bcc9a976599501d692598c38078ba82289630",
+    "train_usage.py": "5263b2ac4109c773d8246d933f829b162de9afec9f2436797ec27070447f3758",
+    "train_live.py": "150c03c673e78783bf0953ca6433d709502c32db6e1ba8a132d7476dd85e52d5",
+    "train_facts.py": "151f531098938bd740d67accc94c4848fe81769b9d30bea35b92ccbbd666a276"
+  },
+  "weights_sha256": "4df0f1af85ac40400c22cf9361b59ea34af7773c8f40768d02aa0ab7ef8234da",
+  "preprocessing_sha256": "3b67cc127c2ff56adfb5388ce08116ee9ae72763414e55502ade375a0e212d9d",
+  "seconds": 129.91473758290522,
+  "sample_ids": [
+    [
+      "deb137",
+      "00789-apt_install"
+    ],
+    [
+      "deb137",
+      "00790-apt_install"
+    ],
+    [
+      "deb137",
+      "00791-apt_install"
+    ],
+    [
+      "deb137",
+      "00792-apt_install"
+    ],
+    [
+      "deb137",
+      "00793-apt_install"
+    ],
+    [
+      "deb137",
+      "00794-apt_install"
+    ],
+    [
+      "deb137",
+      "00795-apt_install"
+    ],
+    [
+      "deb137",
+      "00796-apt_install"
+    ],
+    [
+      "deb137",
+      "00797-apt_install"
+    ],
+    [
+      "deb137",
+      "00798-apt_install"
+    ],
+    [
+      "deb137",
+      "00799-apt_install"
+    ],
+    [
+      "deb137",
+      "00800-apt_install"
+    ],
+    [
+      "deb137",
+      "00801-apt_install"
+    ],
+    [
+      "deb137",
+      "00802-apt_install"
+    ],
+    [
+      "deb137",
+      "00804-apt_install"
+    ],
+    [
+      "deb137",
+      "00805-apt_install"
+    ],
+    [
+      "deb137",
+      "00807-apt_install"
+    ],
+    [
+      "deb137",
+      "00808-apt_install"
+    ],
+    [
+      "deb137",
+      "00810-apt_install"
+    ],
+    [
+      "deb137",
+      "00812-apt_install"
+    ],
+    [
+      "deb137",
+      "00815-apt_install"
+    ],
+    [
+      "deb137",
+      "00817-apt_install"
+    ],
+    [
+      "deb137",
+      "00818-apt_install"
+    ],
+    [
+      "deb137",
+      "00820-apt_install"
+    ],
+    [
+      "deb137",
+      "00822-apt_install"
+    ],
+    [
+      "deb137",
+      "00823-apt_install"
+    ],
+    [
+      "deb137",
+      "00824-apt_install"
+    ],
+    [
+      "deb137",
+      "00828-apt_install"
+    ],
+    [
+      "deb137",
+      "00830-apt_purge"
+    ],
+    [
+      "deb137",
+      "00831-apt_purge"
+    ],
+    [
+      "deb137",
+      "00834-apt_purge"
+    ],
+    [
+      "deb137",
+      "00836-apt_purge"
+    ]
+  ],
+  "sample_scores": [
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.4016053378582001,
+    0.9982953667640686,
+    0.9982751607894897,
+    0.9982682466506958,
+    0.9982886910438538
+  ],
+  "note": "single-seed development baseline, not the historical four-seed cross-validation ensemble"
+}

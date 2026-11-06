@@ -1,0 +1,69 @@
+{
+ "model": "known_ext_boost",
+ "split": "target",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.5512753601996148,
+ "risky_rows": [
+  3,
+  574
+ ],
+ "risky_groups": [
+  3,
+  161
+ ],
+ "risky_bound": 0.04745250831360665,
+ "harmless_auto": 0.21462639109697934,
+ "unchanged": [
+  146,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  124,
+  357
+ ],
+ "denied_by_gemini": [
+  3,
+  448
+ ],
+ "review": [
+  51,
+  2090
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/etc/cron.hourly/ta-new"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "cp",
+    "/etc/ssh/ssh_host_ecdsa_key",
+    "/tmp/ta-copy"
+   ],
+   [
+    "read_private"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    ".bash_profile"
+   ],
+   [
+    "change:persistence"
+   ]
+  ]
+ ]
+}

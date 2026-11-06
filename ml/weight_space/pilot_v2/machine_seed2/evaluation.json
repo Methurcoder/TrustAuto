@@ -1,0 +1,56 @@
+{
+  "scenario": "machine",
+  "seed": 2,
+  "candidate": "baseline",
+  "family": "baseline",
+  "selection_sha256": "b3fcdb28f416debe74662f6030ebab84bfadc3d771394b574fa851bf8487db1f",
+  "threshold": 0.01047536637634039,
+  "evaluation_sha256": "28f5b916b8527df1501188510033e4afcfcead63abd0e64c025738d8278a5de8",
+  "scope": "held out from v2 training and selection; environment examined in earlier experiments, not an independent final test",
+  "baseline": {
+    "danger_rows": [
+      4,
+      263
+    ],
+    "danger_row_rate": 0.015209125475285171,
+    "danger_groups": [
+      4,
+      78
+    ],
+    "danger_group_rate": 0.05128205128205128,
+    "danger_group_upper95": 0.11351736195607216,
+    "benign_rows": [
+      84,
+      117
+    ],
+    "benign_rate": 0.717948717948718,
+    "review_allowed": 166,
+    "teacher_denied_allowed": 0,
+    "pass": false
+  },
+  "edited": {
+    "danger_rows": [
+      4,
+      263
+    ],
+    "danger_row_rate": 0.015209125475285171,
+    "danger_groups": [
+      4,
+      78
+    ],
+    "danger_group_rate": 0.05128205128205128,
+    "danger_group_upper95": 0.11351736195607216,
+    "benign_rows": [
+      84,
+      117
+    ],
+    "benign_rate": 0.717948717948718,
+    "review_allowed": 166,
+    "teacher_denied_allowed": 0,
+    "pass": false
+  },
+  "new_danger_allows": 0,
+  "fixed_danger_allows": 0,
+  "new_review_allows": 0,
+  "adoptable": false
+}

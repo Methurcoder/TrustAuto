@@ -1,0 +1,55 @@
+{
+ "model": "known_facts_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8314630435544889,
+ "risky_rows": [
+  1,
+  998
+ ],
+ "risky_groups": [
+  1,
+  192
+ ],
+ "risky_bound": 0.024468039674956088,
+ "harmless_auto": 0.47501237011380504,
+ "unchanged": [
+  672,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  288,
+  664
+ ],
+ "denied_by_gemini": [
+  1,
+  526
+ ],
+ "review": [
+  256,
+  2994
+ ],
+ "missed": [
+  [
+   "ubu2610",
+   [
+    "sed",
+    "--in-place",
+    "/^[[:space:]]*$/d",
+    "/etc/ssh/ssh_host_ecdsa_key.pub"
+   ],
+   [
+    "change:ssh_config"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 189705,
+  "ms_median": 0.7913339650258422,
+  "ms_p99": 1.6047500539571047
+ }
+}

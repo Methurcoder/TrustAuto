@@ -1,0 +1,14 @@
+[Unit]
+Description=Collect machine facts for the TrustAuto risk model
+Documentation=file:///usr/share/doc/trustauto/README.md
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/trustauto/trustauto-facts collect
+Nice=10
+IOSchedulingClass=idle
+# Only reads the system; writes nothing but the snapshot.
+ProtectSystem=strict
+ReadWritePaths=/var/lib/trustauto
+PrivateTmp=yes
+NoNewPrivileges=yes

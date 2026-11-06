@@ -1,0 +1,1 @@
+{"scenario": "target", "seed": 1, "selected": "bias_0.5", "baseline": {"danger_rows": [3, 184], "danger_groups": [2, 32], "benign_rows": [85, 271]}, "chosen": {"danger_rows": [0, 184], "danger_groups": [0, 32], "benign_rows": [0, 271], "new_review_allows": 0}}

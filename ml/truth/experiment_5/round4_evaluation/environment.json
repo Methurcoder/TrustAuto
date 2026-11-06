@@ -1,0 +1,14 @@
+{
+  "captured_at": "2026-11-06T07:13:40.277318+00:00",
+  "python": "3.13.9 (v3.13.9:8183fa5e3f7, Oct 14 2025, 10:27:13) [Clang 16.0.0 (clang-1600.0.26.6)]",
+  "executable": "<path>/venv-ml/bin/python",
+  "packages": {
+    "numpy": "2.5.4",
+    "scikit-learn": "1.9.1",
+    "torch": "2.15.0"
+  },
+  "training_command_environment": {
+    "OMP_NUM_THREADS": "2",
+    "TA_SEED": "default 1; not captured from the terminated processes"
+  }
+}

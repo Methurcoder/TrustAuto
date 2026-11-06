@@ -1,0 +1,243 @@
+:root {
+  color-scheme: dark;
+  --bg: #0d0f0e;
+  --panel: #141715;
+  --panel-raised: #1a1e1b;
+  --line: #2a2f2b;
+  --text: #dde1da;
+  --muted: #98a096;
+  --prompt: #7f8a7e;
+  --root: #f0b44a;
+  --user: #84c5a6;
+  --ask: #a9b6f5;
+  --deny: #f2837b;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, "Cascadia Mono", "Noto Sans Mono", Consolas, monospace;
+  --sans: system-ui, -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.75 var(--sans);
+  overflow-wrap: anywhere;
+}
+
+a { color: inherit; text-underline-offset: 3px; }
+a:hover { color: var(--root); }
+:focus-visible { outline: 2px solid var(--root); outline-offset: 3px; border-radius: 2px; }
+
+code, pre { font-family: var(--mono); }
+code { font-size: .92em; color: #f0f2ec; }
+p code { white-space: nowrap; }
+pre { margin: 0; font-size: 14px; line-height: 1.7; overflow-x: auto; }
+
+.wrap { width: min(1040px, 100%); margin: 0 auto; padding: 0 24px; }
+
+/* Header */
+.site-header { border-bottom: 1px solid var(--line); }
+.site-header .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; min-height: 64px; padding-block: 12px; }
+.brand { font: 600 17px var(--mono); text-decoration: none; }
+.brand::before { content: "#"; color: var(--root); margin-right: 8px; }
+.status { font: 12px var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 8px; white-space: nowrap; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-left: auto; font: 14px var(--mono); }
+.site-nav a { color: var(--muted); text-decoration: none; }
+.site-nav a:hover { color: var(--root); }
+.site-nav .lang { color: var(--text); padding-left: 20px; border-left: 1px solid var(--line); }
+
+/* Hero */
+.hero { padding: 72px 0 80px; }
+.hero h1 { margin: 0; font: 700 clamp(24px, 6.8vw, 52px)/1.3 var(--sans); letter-spacing: .01em; }
+.hero h1 code { font-size: .92em; color: var(--root); }
+.hero h1 span { display: block; color: var(--muted); }
+.lead { max-width: 660px; margin: 24px 0 0; font-size: 17px; color: #c3c9c0; }
+
+.terminal { margin-top: 48px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); overflow: hidden; }
+.terminal-bar { padding: 8px 16px; border-bottom: 1px solid var(--line); background: var(--panel-raised); font: 12px var(--mono); color: var(--muted); }
+.verdicts { width: 100%; border-collapse: collapse; font: 15px/1.5 var(--mono); }
+.verdicts th, .verdicts td { padding: 16px; text-align: left; vertical-align: top; font-weight: 400; }
+.verdicts tr + tr th, .verdicts tr + tr td { border-top: 1px solid var(--line); }
+.verdicts th { color: var(--text); }
+.verdicts th::before { content: "$ "; color: var(--prompt); }
+.verdicts .why { color: var(--muted); font-family: var(--sans); font-size: 14px; }
+.verdicts .tag-cell { width: 1%; white-space: nowrap; text-align: right; }
+
+.tag { display: inline-block; min-width: 56px; padding: 1px 10px; border: 1px solid currentColor; border-radius: 4px; font: 600 13px/1.6 var(--mono); text-align: center; }
+.tag.root { color: var(--root); }
+.tag.user { color: var(--user); }
+.tag.ask { color: var(--ask); }
+.tag.deny { color: var(--deny); }
+
+/* Sections */
+section { padding: 72px 0; border-top: 1px solid var(--line); }
+h2 { margin: 0 0 16px; font: 700 clamp(24px, 3.4vw, 32px)/1.4 var(--sans); }
+h3 { margin: 0 0 8px; font: 600 16px/1.5 var(--sans); }
+.section-lead { max-width: 680px; margin: 0 0 40px; color: #c3c9c0; }
+.note { margin: 16px 0 0; font-size: 14px; color: var(--muted); }
+
+/* Rule order */
+.order { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin: 0; padding: 0; list-style: none; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: clip; }
+.order li { display: flex; flex-direction: column; gap: 10px; padding: 20px 16px; background: var(--panel); }
+.order .tag { align-self: flex-start; }
+.order code { font-size: 15px; font-weight: 600; }
+.order p { margin: 0; font-size: 14px; line-height: 1.65; color: #c3c9c0; }
+.order-caption { margin: 12px 0 0; font: 13px var(--mono); color: var(--muted); }
+
+/* The character from the CLI checks each rule in turn as the list scrolls past.
+   CSS only, since the page allows no scripts. Hidden where scroll-driven
+   animations are missing or motion is reduced. */
+.order li { position: relative; view-timeline: --rule block; }
+.peek { display: none; }
+.peek.deny { --c: var(--deny); }
+.peek.ask { --c: var(--ask); }
+.peek.root { --c: var(--root); }
+.peek.user { --c: var(--user); }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .peek {
+      --from: 0 -32px;
+      --to: 0 32px;
+      display: block; position: absolute; top: 16px; right: 16px; width: 48px; height: 24px; pointer-events: none; opacity: 0;
+      animation: peek linear both; animation-timeline: --rule; animation-range: cover 40% cover 60%;
+    }
+    .peek span {
+      position: absolute; inset: 0; display: grid; place-items: center; border-radius: 4px;
+      background: var(--root); color: var(--bg); font: 700 13px/1 var(--mono); white-space: pre;
+    }
+    .peek .verdict { background: var(--c); animation: verdict linear both; animation-timeline: --rule; animation-range: cover 40% cover 60%; }
+    .order .tag { animation: checked linear both; animation-timeline: --rule; animation-range: cover 40% cover 60%; }
+
+    /* Side by side, one timeline for the whole list hands the character from rule to rule. */
+    @media (min-width: 861px) {
+      .order { view-timeline: --rules block; }
+      .peek { --from: -48px 0; --to: 48px 0; }
+      .peek, .peek .verdict, .order .tag { animation-timeline: --rules; }
+      .order li:nth-child(1) :is(.peek, .verdict, .tag) { animation-range: cover 22% cover 34%; }
+      .order li:nth-child(2) :is(.peek, .verdict, .tag) { animation-range: cover 34% cover 46%; }
+      .order li:nth-child(3) :is(.peek, .verdict, .tag) { animation-range: cover 46% cover 58%; }
+      .order li:nth-child(4) :is(.peek, .verdict, .tag) { animation-range: cover 58% cover 70%; }
+      .order li:nth-child(5) :is(.peek, .verdict, .tag) { animation-range: cover 70% cover 82%; }
+    }
+  }
+}
+
+/* In from the previous rule, a look, a hop as it decides, out to the next. */
+@keyframes peek {
+  0% { opacity: 0; translate: var(--from); scale: .7; }
+  16% { opacity: 1; translate: 0 0; scale: 1; }
+  44% { translate: 0 0; }
+  50% { translate: 0 -8px; }
+  56% { translate: 0 0; }
+  84% { opacity: 1; translate: 0 0; scale: 1; }
+  100% { opacity: 0; translate: var(--to); scale: .7; }
+}
+@keyframes verdict {
+  0%, 48% { opacity: 0; }
+  52%, 100% { opacity: 1; }
+}
+/* Checked rules keep a tint once the character has moved on. */
+@keyframes checked {
+  0%, 48% { background: transparent; }
+  52%, 100% { background: color-mix(in srgb, currentColor 18%, transparent); }
+}
+
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; margin-top: 48px; align-items: start; }
+.two p { margin: 0 0 12px; color: #c3c9c0; }
+.block { padding: 16px 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); min-width: 0; }
+.block .c { color: var(--prompt); }
+.block .k { color: var(--ask); }
+.block .v { color: var(--user); }
+
+/* Flow */
+.flow { padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.flow .up { color: var(--root); }
+.flow .dim { color: var(--muted); }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin: 40px 0 0; }
+.facts div { min-width: 0; }
+.facts dt { font: 600 24px/1.3 var(--mono); color: var(--root); }
+.facts dd { margin: 8px 0 0; font-size: 14px; line-height: 1.65; color: #c3c9c0; }
+
+/* Commands and steps */
+.commands { width: 100%; border-collapse: collapse; }
+.commands th, .commands td { padding: 12px 16px 12px 0; border-top: 1px solid var(--line); text-align: left; vertical-align: top; font-weight: 400; }
+.commands th { width: 40%; font: 14px/1.7 var(--mono); }
+.commands td { color: #c3c9c0; font-size: 15px; }
+
+.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 28px; }
+.steps > li { counter-increment: step; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 0 12px; }
+.steps > li::before { content: counter(step); color: var(--root); font: 600 16px/1.75 var(--mono); }
+.steps h3 { grid-column: 2; }
+.steps .block, .steps p { grid-column: 2; }
+.steps p { margin: 0; color: #c3c9c0; font-size: 15px; }
+.steps .block + p { margin-top: 8px; }
+
+/* Limits */
+.limits { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 40px; }
+.limits p { margin: 0; color: #c3c9c0; font-size: 15px; }
+.limits .first { grid-column: 1 / -1; padding: 20px; border: 1px solid var(--deny); border-radius: 8px; }
+
+/* Parts still to be written before release */
+.draft { padding: 24px; border: 1px dashed var(--muted); border-radius: 8px; color: #c3c9c0; }
+.draft strong { display: block; margin-bottom: 8px; font: 600 13px var(--mono); color: var(--root); }
+.draft p { margin: 0; }
+
+.site-footer { padding: 32px 0 48px; border-top: 1px solid var(--line); font: 13px var(--mono); color: var(--muted); }
+
+@media (max-width: 860px) {
+  .order { grid-template-columns: 1fr; }
+  .order li { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 4px 12px; padding: 16px; }
+  .order .tag { grid-row: 1 / span 2; }
+  .order code, .order p { grid-column: 2; }
+  .two, .limits, .facts { grid-template-columns: minmax(0, 1fr); }
+  .facts { gap: 24px; }
+}
+
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+  .site-nav { margin-left: 0; width: 100%; }
+  .site-nav .lang { margin-left: auto; padding-left: 0; border-left: 0; }
+  .hero { padding: 48px 0 56px; }
+  section { padding: 56px 0; }
+  .lead { font-size: 16px; }
+  pre { font-size: 13px; }
+
+  .verdicts, .verdicts tbody, .verdicts tr, .verdicts th, .verdicts td { display: block; width: 100%; }
+  .verdicts tr { padding: 14px 16px; }
+  .verdicts tr + tr { border-top: 1px solid var(--line); }
+  .verdicts th, .verdicts td, .verdicts tr + tr th, .verdicts tr + tr td { padding: 0; border: 0; }
+  .verdicts .why { margin-top: 4px; }
+  .verdicts .tag-cell { width: auto; margin-top: 8px; text-align: left; }
+
+  .commands th, .commands td { display: block; width: 100%; padding: 0; border: 0; }
+  .commands tr { display: block; padding: 12px 0; border-top: 1px solid var(--line); }
+}
+
+/* Scrolling comes to rest at the start of each section. A section taller than the
+   window still scrolls freely inside; only on wide screens is the stop firm, since
+   phones see mostly tall sections. */
+html { scroll-snap-type: y proximity; }
+.hero, section { scroll-snap-align: start; }
+.site-footer { scroll-snap-align: end; }
+@media (min-width: 861px) and (min-height: 640px) {
+  html { scroll-snap-type: y mandatory; }
+}
+
+/* Each section's content rises into place as the section arrives. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    section > .wrap { animation: arrive linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+  }
+}
+@keyframes arrive {
+  from { opacity: 0; translate: 0 48px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

@@ -1,0 +1,10 @@
+known_avg_facts_transformer machine
+known_avg_ext_facts_transformer machine
+known_avg_ext_general_facts_transformer machine
+known_ext_boost machine
+known_boost machine
+known_avg_facts_transformer target
+known_avg_ext_facts_transformer target
+known_avg_ext_general_facts_transformer target
+known_ext_boost target
+known_boost target

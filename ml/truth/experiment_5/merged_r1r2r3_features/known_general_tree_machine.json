@@ -1,0 +1,123 @@
+{
+ "model": "known_general_tree",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8049000910388429,
+ "risky_rows": [
+  8,
+  998
+ ],
+ "risky_groups": [
+  2,
+  192
+ ],
+ "risky_bound": 0.03242568486834314,
+ "harmless_auto": 0.18753092528451262,
+ "unchanged": [
+  224,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  155,
+  664
+ ],
+ "denied_by_gemini": [
+  1,
+  526
+ ],
+ "review": [
+  36,
+  2994
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "tee",
+    "/var/spool/cron/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "tee",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "tee",
+    "/var/spool/cron/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/var/spool/cron/settings"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    ".bash_profile"
+   ],
+   [
+    "change:persistence"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 25689,
+  "ms_median": 0.02962502185255289,
+  "ms_p99": 0.14883303083479404
+ }
+}

@@ -1,0 +1,103 @@
+{
+ "model": "known_general_boost",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8280885349499546,
+ "risky_rows": [
+  6,
+  998
+ ],
+ "risky_groups": [
+  2,
+  192
+ ],
+ "risky_bound": 0.03242568486834314,
+ "harmless_auto": 0.3320138545274616,
+ "unchanged": [
+  440,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  231,
+  664
+ ],
+ "denied_by_gemini": [
+  0,
+  526
+ ],
+ "review": [
+  65,
+  2994
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "touch",
+    ".bash_profile"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/var/spool/cron/settings"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/local.conf"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/notes"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "touch",
+    ".bash_profile"
+   ],
+   [
+    "change:persistence"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 402419,
+  "ms_median": 2.559207961894572,
+  "ms_p99": 3.434208920225501
+ }
+}

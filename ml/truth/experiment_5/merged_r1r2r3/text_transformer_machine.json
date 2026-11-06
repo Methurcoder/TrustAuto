@@ -1,0 +1,105 @@
+{
+ "model": "text_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.8840751505517526,
+ "risky_rows": [
+  6,
+  998
+ ],
+ "risky_groups": [
+  5,
+  192
+ ],
+ "risky_bound": 0.053972267025076126,
+ "harmless_auto": 0.07867392380009897,
+ "unchanged": [
+  123,
+  1357
+ ],
+ "changed_allowed_by_gemini": [
+  36,
+  664
+ ],
+ "denied_by_gemini": [
+  0,
+  526
+ ],
+ "review": [
+  63,
+  2994
+ ],
+ "missed": [
+  [
+   "deb137",
+   [
+    "ifup",
+    "--all"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "postfix",
+    "stop"
+   ],
+   [
+    "check:role_smtp"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "a2dissite",
+    "--quiet",
+    "virtual_host"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "cp",
+    "/etc/hostname",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "tee",
+    "/var/spool/cron/backup1"
+   ],
+   [
+    "change:persistence"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 203404,
+  "ms_median": 0.6610829150304198,
+  "ms_p99": 0.9666670812293887
+ }
+}

@@ -1,0 +1,1 @@
+{"scenario": "operation", "seed": 3, "selected": "meanr1_L1_0.3", "baseline": {"danger_rows": [2, 149], "danger_groups": [1, 32], "benign_rows": [32, 296]}, "chosen": {"danger_rows": [0, 149], "danger_groups": [0, 32], "benign_rows": [28, 296], "new_review_allows": 0}}

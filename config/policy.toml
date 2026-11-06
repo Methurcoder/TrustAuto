@@ -1,0 +1,174 @@
+# TrustAuto sample policy for Debian/Ubuntu.
+# Copy to /etc/trustauto/policy.toml (root:root, 0644) and edit.
+# Validate with: trustauto check
+#
+# Precedence, whatever the order in this file: deny > ask > allow > envelope > user.
+# Anything that matches no rule needs an approver.
+#
+# Argument patterns:
+#   literal         exactly this string
+#   {opt:a|b}       one of these exact strings
+#   {pkg}           package name, no options, paths, versions or regexes
+#   {unit}          systemd unit name, no options or globs
+#   {word}          letters, digits and _.:@+-  never starting with "-"
+#   {int}           digits
+#   {path:/prefix}  an existing path under /prefix, also after resolving symlinks
+#   {any}           anything (only in deny, ask and user rules)
+# Add "+" (one or more) or "*" (zero or more) to the last pattern to repeat it.
+
+version = 1
+
+# rule:   rules only. allow rules elevate immediately, envelope rules need an approver.
+# hybrid: rules and ML (default). allow rules elevate unless the risk score is high;
+#         envelope rules elevate only when the score is below the model's threshold.
+# ml:     ML only (preview, high risk). The model alone decides commands that need
+#         root, rule or no rule. deny, ask and user rules still apply, and shells,
+#         interpreters and kernel or disk tools always need an approver.
+# The model has not met its pass mark (docs/ML_EXPERIMENT_5.md). hybrid and ml need
+# the machine facts from trustauto-facts; without them, ML paths need an approver.
+# Change it with: sudo trustauto mode rule|hybrid|ml
+mode = "hybrid"
+
+# Refuse automatic elevation when stdin is not a terminal, which stops most
+# background jobs and package install scripts running as this user.
+require_tty = true
+
+[ml]
+# The model's own threshold decides by default. "low" can only make it stricter.
+# low = 0.10
+high = 0.6
+# ml mode only: let the model judge programs it had fewer than three allowed
+# training examples of. High risk. `sudo trustauto mode ml` asks about this.
+judge_unknown = false
+
+[network]
+# Commands that may talk to other machines (apt update/install, curl, git pull,
+# anything with a URL) need an approver in every mode, even with an allow rule.
+ask = true
+
+[approval]
+# Users who may approve, authenticating through PAM with their own password.
+# Empty means every Ask verdict is refused.
+approvers = []
+attempts = 3
+
+# --- Runs without privileges ------------------------------------------------
+
+[[rule]]
+id = "apt-read"
+action = "user"
+bin = "/usr/bin/apt"
+args = ["{opt:list|search|show|policy|depends|rdepends}", "{any}*"]
+
+[[rule]]
+id = "systemctl-read"
+action = "user"
+bin = "/usr/bin/systemctl"
+args = ["{opt:status|show|cat|is-active|is-enabled|is-failed|list-units|list-unit-files|list-timers}", "{any}*"]
+
+[[rule]]
+id = "systemctl-user"
+action = "user"
+bin = "/usr/bin/systemctl"
+args = ["--user", "{any}*"]
+
+# --- Elevates automatically -------------------------------------------------
+
+[[rule]]
+id = "apt-update"
+action = "allow"
+bin = "/usr/bin/apt"
+args = ["update"]
+
+[[rule]]
+id = "systemctl-daemon-reload"
+action = "allow"
+bin = "/usr/bin/systemctl"
+args = ["daemon-reload"]
+
+[[rule]]
+id = "journal-unit"
+action = "allow"
+bin = "/usr/bin/journalctl"
+args = ["-u", "{unit}", "--no-pager"]
+
+[[rule]]
+id = "dmesg"
+action = "allow"
+bin = "/usr/bin/dmesg"
+args = []
+
+[[rule]]
+id = "ufw-status"
+action = "allow"
+bin = "/usr/sbin/ufw"
+args = ["status"]
+
+# --- Ceiling for the risk model ---------------------------------------------
+# Typed arguments keep what the model can approve bounded, even when it is wrong.
+
+[[rule]]
+id = "apt-install"
+action = "envelope"
+bin = "/usr/bin/apt"
+args = ["install", "{pkg}+"]
+
+[[rule]]
+id = "apt-remove"
+action = "envelope"
+bin = "/usr/bin/apt"
+args = ["remove", "{pkg}+"]
+
+[[rule]]
+id = "apt-upgrade"
+action = "envelope"
+bin = "/usr/bin/apt"
+args = ["upgrade"]
+
+[[rule]]
+id = "systemctl-control"
+action = "envelope"
+bin = "/usr/bin/systemctl"
+args = ["{opt:start|stop|restart|reload}", "{unit}"]
+
+# --- Always needs an approver -----------------------------------------------
+
+[[rule]]
+id = "reboot"
+action = "ask"
+bin = "/usr/bin/systemctl"
+args = ["{opt:reboot|poweroff|halt}"]
+
+[[rule]]
+id = "edit-sudoers"
+action = "ask"
+bin = "/usr/sbin/visudo"
+args = []
+
+# --- Never runs through TrustAuto -------------------------------------------
+# These only stop requests that reach TrustAuto. Unwrapped commands still run
+# as the user, without privileges.
+
+[[rule]]
+id = "no-rm"
+action = "deny"
+bin = "/usr/bin/rm"
+args = ["{any}*"]
+
+[[rule]]
+id = "no-dd"
+action = "deny"
+bin = "/usr/bin/dd"
+args = ["{any}*"]
+
+[[rule]]
+id = "no-mkfs"
+action = "deny"
+bin = "/usr/sbin/mkfs"
+args = ["{any}*"]
+
+[[rule]]
+id = "no-shell"
+action = "deny"
+bin = "/usr/bin/bash"
+args = ["{any}*"]

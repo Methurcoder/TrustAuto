@@ -1,0 +1,54 @@
+{
+ "model": "boost",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.9283618112183785,
+ "risky_rows": [
+  1,
+  574
+ ],
+ "risky_groups": [
+  1,
+  161
+ ],
+ "risky_bound": 0.02912461772065672,
+ "harmless_auto": 0.07710651828298887,
+ "unchanged": [
+  28,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  69,
+  357
+ ],
+ "denied_by_gemini": [
+  0,
+  448
+ ],
+ "review": [
+  8,
+  2090
+ ],
+ "missed": [
+  [
+   "ubu2610",
+   [
+    "cp",
+    "/etc/ssh/ssh_host_ecdsa_key",
+    "/tmp/ta-copy"
+   ],
+   [
+    "read_private"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 348657,
+  "ms_median": 2.4564580526202917,
+  "ms_p99": 5.767374997958541
+ }
+}

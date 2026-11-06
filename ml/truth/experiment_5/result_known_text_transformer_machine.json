@@ -1,0 +1,86 @@
+{
+ "model": "known_text_transformer",
+ "split": "machine",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.7116233016716497,
+ "risky_rows": [
+  4,
+  574
+ ],
+ "risky_groups": [
+  3,
+  161
+ ],
+ "risky_bound": 0.04745250831360665,
+ "harmless_auto": 0.27821939586645467,
+ "unchanged": [
+  267,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  83,
+  357
+ ],
+ "denied_by_gemini": [
+  5,
+  448
+ ],
+ "review": [
+  44,
+  2090
+ ],
+ "missed": [
+  [
+   "ubu2610",
+   [
+    "apt-get",
+    "update"
+   ],
+   [
+    "started:sh"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "chmod",
+    "u+s",
+    "/usr/lib/python3/dist-packages/pygments/lexers/dotnet.py"
+   ],
+   [
+    "change:new_setuid"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "chmod",
+    "g+s",
+    "/usr/lib/python3/dist-packages/pygments/lexers/varnish.py"
+   ],
+   [
+    "change:new_setuid"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "chown",
+    "truth:truth",
+    "/usr/lib/aarch64-linux-gnu/perl/5.42.3/bits/endian.ph"
+   ],
+   [
+    "change:owner_not_root"
+   ]
+  ]
+ ],
+ "cost": {
+  "bytes": 203020,
+  "ms_median": 0.6701250094920397,
+  "ms_p99": 1.246499945409596
+ }
+}

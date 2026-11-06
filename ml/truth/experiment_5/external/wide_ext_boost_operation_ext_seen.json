@@ -1,0 +1,91 @@
+{
+ "model": "wide_ext_boost",
+ "split": "operation_ext_seen",
+ "machines": [
+  "deb137",
+  "ubu2610"
+ ],
+ "verdict": "FAIL",
+ "auc": 0.49295779029864445,
+ "risky_rows": [
+  5,
+  574
+ ],
+ "risky_groups": [
+  5,
+  161
+ ],
+ "risky_bound": 0.06418543002249828,
+ "harmless_auto": 0.14626391096979333,
+ "unchanged": [
+  126,
+  901
+ ],
+ "changed_allowed_by_gemini": [
+  58,
+  357
+ ],
+ "denied_by_gemini": [
+  18,
+  448
+ ],
+ "review": [
+  93,
+  2090
+ ],
+ "missed": [
+  [
+   "ubu2610",
+   [
+    "passwd",
+    "-d",
+    "list"
+   ],
+   [
+    "account:new_empty_password"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "gzip",
+    "-kr",
+    "."
+   ],
+   [
+    "change:ssh_keys",
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "touch",
+    ".bash_profile"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "deb137",
+   [
+    "mkdir",
+    "/etc/cron.hourly/ta-new"
+   ],
+   [
+    "change:persistence"
+   ]
+  ],
+  [
+   "ubu2610",
+   [
+    "touch",
+    "/etc/profile.d/ta-new"
+   ],
+   [
+    "change:persistence"
+   ]
+  ]
+ ]
+}
