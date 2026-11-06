@@ -18,6 +18,19 @@ visitor cookies or authorization headers. No secret or storage binding is needed
 Never assign it the whole `project.arils.jp` custom domain: the `atemoya` Worker
 owns the homepage; the separate `project` Worker owns Blog, Local and diagnosis.
 
+The entry document (`/trustauto/` and `index.html`) chooses its initial language
+from trusted Cloudflare `request.cf.country`: Japan uses Japanese; other known
+countries redirect temporarily to `/trustauto/en/`. When country is unavailable,
+supported browser language preferences are used; other browser languages fall
+back to English, and an absent preference falls back to Japanese. An explicit
+`?lang=ja` or `?lang=en` takes precedence. The English page's Japanese link uses
+`?lang=ja` so an overseas visitor can switch without being redirected back.
+Direct English URLs always stay English. Country/language decisions are not
+cached across visitors. No country/IP data, cookies, local storage or external
+geolocation service is added. GitHub Pages remains a static origin: geographic
+selection runs only on the public Arils URL, and direct Pages visitors use the
+ordinary manual language links.
+
 Pages updates automatically when the GitHub `main` branch changes `site/` or
 the workflow. Its existing daily run refreshes the static star count. Future
 content updates need only a Pages deployment; redeploy this Worker only when

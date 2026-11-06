@@ -46,7 +46,7 @@ test('other applications credentials are not forwarded in either direction', asy
   });
   assert.equal(response.status, 304);
   assert.equal(response.headers.get('Set-Cookie'), null);
-  assert.match(response.headers.get('Cache-Control'), /must-revalidate/);
+  assert.match(response.headers.get('Cache-Control'), /no-store/);
 });
 
 test('upstream directory redirects stay on the public TrustAuto path', async () => {
@@ -80,4 +80,76 @@ test('unsupported methods, invalid encodings, and upstream failures fail locally
   }
   const failed = await proxyRequest(new Request(origin + '/trustauto/'), async () => { throw new Error('offline'); });
   assert.equal(failed.status, 502);
+});
+
+function visitor(path = '', { country, headers = {}, method = 'GET' } = {}) {
+  const request = new Request(origin + '/trustauto/' + path, { headers, method });
+  if (country !== undefined) Object.defineProperty(request, 'cf', { value: { country } });
+  return request;
+}
+
+test('overseas visitors use English regardless of a Japanese browser preference', async () => {
+  for (const country of ['US', 'GB', 'FR', 'KR', 'DE', 'us']) {
+    for (const path of ['', 'index.html?campaign=release']) {
+      const result = await proxyRequest(visitor(path, { country, headers: { 'Accept-Language': 'ja-JP,ja;q=0.9' } }), neverFetch);
+      assert.equal(result.status, 302, country);
+      assert.equal(result.headers.get('Location'), origin + '/trustauto/en/' + (path.includes('?') ? '?campaign=release' : ''));
+      assert.match(result.headers.get('Cache-Control'), /private.*no-store/);
+      assert.equal(result.headers.get('Set-Cookie'), null);
+    }
+  }
+});
+
+test('Japan uses Japanese and language decisions are not shared in cache', async () => {
+  let calls = 0;
+  const result = await proxyRequest(visitor('', { country: 'JP', headers: { 'Accept-Language': 'en-US' } }), async url => {
+    calls++;
+    assert.equal(url.href, 'https://methurcoder.github.io/TrustAuto/');
+    return new Response('Japanese');
+  });
+  assert.equal(calls, 1);
+  assert.equal(result.status, 200);
+  assert.equal(await result.text(), 'Japanese');
+  assert.equal(result.headers.get('Vary'), '*');
+  assert.match(result.headers.get('Cache-Control'), /no-store/);
+});
+
+test('manual Japanese choice wins abroad; an explicit English URL stays English in Japan', async () => {
+  for (const path of ['?lang=ja', 'index.html?lang=ja&campaign=release', 'en/', 'en/index.html']) {
+    const country = path.startsWith('en/') ? 'JP' : 'US';
+    let calls = 0;
+    const result = await proxyRequest(visitor(path, { country }), async () => { calls++; return new Response('Chosen language'); });
+    assert.equal(calls, 1, path);
+    assert.equal(result.status, 200, path);
+  }
+  const english = await proxyRequest(visitor('?lang=en&campaign=release', { country: 'JP' }), neverFetch);
+  assert.equal(english.status, 302);
+  assert.equal(english.headers.get('Location'), origin + '/trustauto/en/?lang=en&campaign=release');
+});
+
+test('unknown country falls back to browser language weights and ignores spoofed country headers', async () => {
+  for (const country of [undefined, null, 'XX', 'T1', 'invalid']) {
+    for (const language of ['en-US,en;q=0.9', 'ja;q=0.4,en;q=0.8', 'fr-FR']) {
+      const result = await proxyRequest(visitor('', { country, headers: { 'Accept-Language': language, 'CF-IPCountry': 'JP' } }), neverFetch);
+      assert.equal(result.status, 302, `${country} ${language}`);
+    }
+  }
+  for (const language of ['', '*', 'en;q=0,ja;q=0.8', 'en;q=bad,ja-JP;q=0.9', 'ja-JP,en;q=0.8']) {
+    const result = await proxyRequest(visitor('', { headers: { 'Accept-Language': language, 'CF-IPCountry': 'US' } }), async () => new Response('Japanese'));
+    assert.equal(result.status, 200, language);
+  }
+});
+
+test('region handling leaves static assets, HEAD, and canonicalization intact', async () => {
+  for (const path of ['style.css', 'favicon.svg', 'missing-page']) {
+    const result = await proxyRequest(visitor(path, { country: 'US', headers: { 'Accept-Language': 'en' } }), async () => new Response('asset'));
+    assert.equal(result.status, 200, path);
+    assert.match(result.headers.get('Cache-Control'), /must-revalidate/);
+  }
+  const head = await proxyRequest(visitor('', { country: 'US', method: 'HEAD' }), neverFetch);
+  assert.equal(head.status, 302);
+  assert.equal(await head.text(), '');
+  const canonical = await proxyRequest(new Request(origin + '/trustauto?lang=ja'), neverFetch);
+  assert.equal(canonical.status, 308);
+  assert.equal(canonical.headers.get('Location'), origin + '/trustauto/?lang=ja');
 });

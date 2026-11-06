@@ -17,7 +17,7 @@ for (const file of ['index.html', 'en/index.html']) {
     for (const [, value] of source.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
       if (value.startsWith('#')) { assert.ok(ids.has(value.slice(1)), value); continue; }
       if (/^https?:/.test(value)) continue;
-      const disk = resolve(dirname(resolve(siteRoot, file)), value);
+      const disk = resolve(dirname(resolve(siteRoot, file)), value.split(/[?#]/, 1)[0]);
       assert.ok(disk.startsWith(siteRoot + '/') || disk === siteRoot, value);
       assert.ok(existsSync(disk), value);
       for (const base of ['https://methurcoder.github.io/TrustAuto/', 'https://project.arils.jp/trustauto/']) {
@@ -40,4 +40,9 @@ test('Pages publishes only site/ and the Cloudflare routes are strictly scoped',
   assert.deepEqual(config.routes.map(route => route.pattern), ['project.arils.jp/trustauto*']);
   assert.ok(config.routes.every(route => !route.custom_domain));
   assert.equal(config.workers_dev, false);
+});
+
+test('manual Japanese choice avoids another region redirect without scripts or storage', () => {
+  const english = readFileSync(resolve(siteRoot, 'en/index.html'), 'utf8');
+  assert.match(english, /class="lang" href="\.\.\/\?lang=ja"/);
 });
