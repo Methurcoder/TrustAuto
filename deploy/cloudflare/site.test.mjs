@@ -35,7 +35,9 @@ test('Pages publishes only site/ and the Cloudflare routes are strictly scoped',
   assert.match(workflow, /pages: write/);
   assert.match(workflow, /id-token: write/);
   const config = JSON.parse(readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8'));
-  assert.deepEqual(config.routes.map(route => route.pattern), ['project.arils.jp/trustauto', 'project.arils.jp/trustauto/*']);
+  // Cloudflare includes the query string in route matching. The final wildcard
+  // also catches /trustauto?x=1; worker.mjs enforces the exact path boundary.
+  assert.deepEqual(config.routes.map(route => route.pattern), ['project.arils.jp/trustauto*']);
   assert.ok(config.routes.every(route => !route.custom_domain));
   assert.equal(config.workers_dev, false);
 });

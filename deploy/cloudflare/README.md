@@ -9,7 +9,10 @@ The Pages workflow uploads only `site/`. GitHub Pages settings use the
 CSS and the icon use relative paths, so both public URLs work.
 
 The `trustauto-pages` Cloudflare Worker proxies only `/trustauto` and
-`/trustauto/*` to that fixed Pages origin. It preserves directory redirects,
+`/trustauto/*` to that fixed Pages origin. Cloudflare's route is `/trustauto*`
+because its route matching includes query strings, including `/trustauto?x=1`.
+The handler enforces the exact path boundary and returns 404 for lookalike
+prefixes such as `/trustauto-other/`. It preserves directory redirects,
 query strings, conditional requests and missing-file status. It does not forward
 visitor cookies or authorization headers. No secret or storage binding is needed.
 Never assign it the whole `project.arils.jp` custom domain: the `atemoya` Worker

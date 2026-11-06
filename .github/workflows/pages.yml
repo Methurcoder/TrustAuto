@@ -6,7 +6,7 @@ name: Pages
 on:
   push:
     branches: [main]
-    paths: ["site/**", ".github/workflows/pages.yml"]
+    paths: ["site/**", "deploy/cloudflare/**", ".github/workflows/pages.yml"]
   schedule:
     - cron: "17 3 * * *"
   workflow_dispatch:
