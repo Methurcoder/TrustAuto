@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
-<meta name="robots" content="noindex">
 <title>TrustAuto</title>
+<link rel="canonical" href="https://project.arils.jp/trustauto/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://project.arils.jp/trustauto/">
 <meta name="description" content="Linux 向けの、常駐しない自動権限昇格ツール。管理者が許可した範囲のコマンドは、sudo と打たなくても root で実行されます。">
-<link rel="alternate" hreflang="en" href="en/">
+<link rel="alternate" hreflang="en" href="https://project.arils.jp/trustauto/en/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -22,6 +24,7 @@
       <a href="#use">使い方</a>
       <a href="#install">導入</a>
       <a href="#limits">制限</a>
+      <a href="https://github.com/Methurcoder/TrustAuto">GitHub</a>
       <a class="lang" href="en/" lang="en" hreflang="en">English</a>
     </nav>
   </div>
@@ -32,6 +35,10 @@
     <div class="wrap">
       <h1><code>sudo</code> を打たなくていい。<span>ただし、許可した範囲だけ。</span></h1>
       <p class="lead">TrustAuto は Linux 向けの自動権限昇格ツールです。普段どおりにコマンドを打つだけで、管理者がポリシーで許可した操作は root で動きます。既定では、未知のコマンドや高リスクの操作は、承認を求めるか拒否します。</p>
+      <p class="actions">
+        <a class="button primary" href="#install">ダウンロード</a>
+        <a class="button" href="https://github.com/Methurcoder/TrustAuto">GitHub<!-- stars --></a>
+      </p>
 
       <div class="terminal">
         <div class="terminal-bar">bash / zsh</div>
@@ -142,10 +149,13 @@
       <p class="section-lead">今はソースからビルドします。Debian と Ubuntu を想定した手順です。</p>
       <ol class="steps">
         <li>
-          <h3>ビルドしてインストールする</h3>
-          <pre class="block" tabindex="0">sudo apt install build-essential libpam0g-dev cargo
+          <h3>ダウンロードしてインストールする</h3>
+          <pre class="block" tabindex="0">git clone https://github.com/Methurcoder/TrustAuto.git
+cd TrustAuto
+sudo apt install build-essential libpam0g-dev cargo
 cargo build --release
 sudo scripts/install.sh</pre>
+          <p>ビルドを待つあいだに、<a href="https://github.com/Methurcoder/TrustAuto">GitHub でスター</a>を押してもらえると励みになります。</p>
         </li>
         <li>
           <h3>ポリシーを設定する</h3>
@@ -219,7 +229,7 @@ sudo scripts/install.sh</pre>
 </main>
 
 <footer class="site-footer">
-  <div class="wrap">TrustAuto</div>
+  <div class="wrap">TrustAuto · Apache-2.0 · <a href="https://github.com/Methurcoder/TrustAuto">GitHub</a> · <a href="https://project.arils.jp/">作品紹介へ</a></div>
 </footer>
 </body>
 </html>

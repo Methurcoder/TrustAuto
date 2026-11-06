@@ -56,6 +56,14 @@ pre { margin: 0; font-size: 14px; line-height: 1.7; overflow-x: auto; }
 .hero h1 span { display: block; color: var(--muted); }
 .lead { max-width: 660px; margin: 24px 0 0; font-size: 17px; color: #c3c9c0; }
 
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 32px 0 0; }
+.button { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 20px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); font: 600 15px var(--mono); text-decoration: none; }
+.button:hover { border-color: var(--root); color: var(--text); }
+.button.primary { border-color: var(--root); background: var(--root); color: var(--bg); }
+.button.primary:hover { background: transparent; color: var(--root); }
+/* Written in by the Pages workflow once the repository has ten stars. */
+.stars { color: var(--root); font-weight: 400; }
+
 .terminal { margin-top: 48px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); overflow: hidden; }
 .terminal-bar { padding: 8px 16px; border-bottom: 1px solid var(--line); background: var(--panel-raised); font: 12px var(--mono); color: var(--muted); }
 .verdicts { width: 100%; border-collapse: collapse; font: 15px/1.5 var(--mono); }

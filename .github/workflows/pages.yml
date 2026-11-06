@@ -1,0 +1,60 @@
+# Publishes site/ to GitHub Pages. Runs on changes to the site and once a day,
+# so the star count written into the page stays current. Settings > Pages >
+# Source must be "GitHub Actions".
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/pages.yml"]
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Check the site and public route contract
+        run: node --test deploy/cloudflare/*.test.mjs
+
+      # The page runs no scripts, so the count is written into the HTML here.
+      # Below ten stars the marker stays an empty comment and nothing shows.
+      - name: Write the star count
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          stars="$(gh api "repos/$GITHUB_REPOSITORY" --jq .stargazers_count)"
+          python3 - "$stars" site/index.html site/en/index.html <<'PY'
+          import pathlib, sys
+          stars = int(sys.argv[1])
+          if stars >= 10:
+              for name in sys.argv[2:]:
+                  page = pathlib.Path(name)
+                  page.write_text(page.read_text().replace(
+                      "<!-- stars -->", f' <span class="stars" aria-label="{stars} stars">★ {stars}</span>'))
+          print(f"{stars} stars")
+          PY
+
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

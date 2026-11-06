@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
-<meta name="robots" content="noindex">
 <title>TrustAuto</title>
+<link rel="canonical" href="https://project.arils.jp/trustauto/en/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://project.arils.jp/trustauto/en/">
 <meta name="description" content="Automatic privilege elevation for Linux, with no daemon. Commands your policy allows run as root without typing sudo.">
-<link rel="alternate" hreflang="ja" href="../">
+<link rel="alternate" hreflang="ja" href="https://project.arils.jp/trustauto/">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../style.css">
 </head>
@@ -22,6 +24,7 @@
       <a href="#use">Usage</a>
       <a href="#install">Install</a>
       <a href="#limits">Limits</a>
+      <a href="https://github.com/Methurcoder/TrustAuto">GitHub</a>
       <a class="lang" href="../" lang="ja" hreflang="ja">日本語</a>
     </nav>
   </div>
@@ -32,6 +35,10 @@
     <div class="wrap">
       <h1>Stop typing <code>sudo</code>.<span>But only for what you allowed.</span></h1>
       <p class="lead">TrustAuto is automatic privilege elevation for Linux. Type commands as usual, and whatever your policy allows runs as root. By default, unknown or high-risk commands ask for approval or are refused.</p>
+      <p class="actions">
+        <a class="button primary" href="#install">Download</a>
+        <a class="button" href="https://github.com/Methurcoder/TrustAuto">GitHub<!-- stars --></a>
+      </p>
 
       <div class="terminal">
         <div class="terminal-bar">bash / zsh</div>
@@ -142,10 +149,13 @@
       <p class="section-lead">For now you build from source. These steps assume Debian or Ubuntu.</p>
       <ol class="steps">
         <li>
-          <h3>Build and install</h3>
-          <pre class="block" tabindex="0">sudo apt install build-essential libpam0g-dev cargo
+          <h3>Download, build and install</h3>
+          <pre class="block" tabindex="0">git clone https://github.com/Methurcoder/TrustAuto.git
+cd TrustAuto
+sudo apt install build-essential libpam0g-dev cargo
 cargo build --release
 sudo scripts/install.sh</pre>
+          <p>While it builds, a <a href="https://github.com/Methurcoder/TrustAuto">star on GitHub</a> would mean a lot.</p>
         </li>
         <li>
           <h3>Set the policy</h3>
@@ -219,7 +229,7 @@ sudo scripts/install.sh</pre>
 </main>
 
 <footer class="site-footer">
-  <div class="wrap">TrustAuto</div>
+  <div class="wrap">TrustAuto · Apache-2.0 · <a href="https://github.com/Methurcoder/TrustAuto">GitHub</a> · <a href="https://project.arils.jp/">More projects</a></div>
 </footer>
 </body>
 </html>
